@@ -1,0 +1,92 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.property-card {
+  transition: all 0.3s ease;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.modal {
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hamburger-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.hamburger-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hamburger-menu span {
+  width: 20px;
+  height: 2px;
+  background: #374151;
+  transition: all 0.3s;
+}
+
+
+
+#adSlider {
+    height: 300px; /* Задай нужную высоту слайдера */
+}
+
+#adSlides {
+    height: 100%;
+    width: 100%;
+}
+
+/* Скрываем кнопки на мобильных устройствах */
+@media (max-width: 1023px) {
+    #adPrev, #adNext {
+        display: none;
+    }
+}
+
+/* Корректное масштабирование слайдов */
+@media (max-width: 1023px) {
+    #adSlides > div {
+        width: 100% !important;
+    }
+}
+
+
+@media (max-width: 1023px) {
+    #adSlides {
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+    }
+
+    #adSlides > div {
+        scroll-snap-align: start;
+    }
+}
+

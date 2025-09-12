@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Недвижимость - Название компании</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <script defer src="js/script.js"></script>
+    <script defer src="js/modal.js"></script>
+    <script defer src="js/burger.js"></script>
+    <script defer src="js/dropdown-menu.js"></script>
+    <script defer src="js/slider.js"></script>
+    <script defer src="pages/data.js"></script>
+    <script defer src="js/aside.js"></script>
+    <script defer src="js/service_main.js"></script>
+</head>
+
+<body class="font-sans ">
+    
+    
+    <header class="bg-gray-100 sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                
+                <a href="/" class="ml-2 text-xl font-semibold flex items-center hover:text-blue-600 transition">
+  <span class="mr-2">(Лого)</span>
+  <span>Название компании</span>
+</a>
+            </div>
+
+            
+            <nav id="mobileMenu" class="hidden fixed top-16 right-0 w-64 bg-white shadow-md py-4 px-6 space-y-4">
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Недвижимость</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Услуги</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Компания</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Поддержка</a>
+                <a href="tel:+71231232827" class="block text-gray-700 hover:text-blue-600">+7 (123) 123‑28‑27</a>
+            </nav>
+
+
+            <div class="flex items-center space-x-4">
+                <button id="openModalBtn"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
+                    Заказать звонок
+                </button>
+                <div class="hidden md:block">
+                    <a href="tel:+71231232827" class="text-gray-700 hover:text-blue-600">+7 (123) 123–28–27</a>
+                </div>
+                <button id="burger" class="text-gray-700 hamburger-menu flex flex-col gap-1 p-2 cursor-pointer">
+                    <span class="block w-5 h-0.5 bg-gray-700 transition-all duration-300"></span>
+                    <span class="block w-5 h-0.5 bg-gray-700 transition-all duration-300"></span>
+                    <span class="block w-5 h-0.5 bg-gray-700 transition-all duration-300"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    
+<section class="relative pb-20 lg:pb-0">
+  
+  <img
+    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=400&fit=crop"
+    alt="Герой"
+    class="w-full h-64 md:h-80 lg:h-[420px] object-cover" />
+
+  
+<div class="
+  relative lg:-mt-24
+  inset-x-0 mx-auto
+  w-full md:w-3/4 lg:w-2/3
+  bg-white shadow-sm rounded-lg  
+  px-8 py-6
+  min-h-24 md:min-h-28
+  flex flex-wrap justify-center items-center gap-6
+  z-30
+">
+<div class="inline-flex"></div>
+    
+    <div class="relative inline-block flex-[1_1_12rem]  min-w-[11rem]  max-w-[22rem]" data-filter-key="place">
+  <button
+  class="filter-toggle w-full flex items-center justify-between gap-2 text-lg
+         px-4 py-4 bg-gray-100 text-gray-700
+         hover:bg-indigo-600 hover:text-white transition
+         border border-gray-300 rounded-none"
+         data-placeholder="Площадка">
+  <span class="filter-label truncate">Площадка</span>
+  <i class="fas fa-chevron-down flex-shrink-0"></i>
+</button>
+      <ul
+  class="filter-options hidden absolute left-0 right-0 mt-2
+         min-w-full max-w-[min(28rem,90vw)]
+         bg-white rounded-lg shadow-lg py-2 z-30">
+        <li><a href="#" data-value="Кушелевская дорога" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Кушелевская дорога</a></li>
+        <li><a href="#" data-value="Лабораторный проспект" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Лабораторный проспект</a></li>
+        <li><a href="#" data-value="Бестужевская" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Бестужевская</a></li>
+        <li><a href="#" data-value="АО «Сестрорецкий инструментальный»" class="block px-4 py-2 leading-snug whitespace-normal hover:bg-indigo-600 hover:text-white">АО «Сестрорецкий инструментальный»</a></li>
+      </ul>
+    </div>
+
+    
+    <div class="relative inline-block flex-[1_1_12rem]  min-w-[11rem]  max-w-[22rem]" data-filter-key="purpose">
+<button
+  class="filter-toggle w-full h-16 flex items-center justify-between gap-2 text-lg
+         px-4 bg-gray-100 text-gray-700
+         hover:bg-indigo-600 hover:text-white transition
+         border border-gray-300 rounded-none"
+  data-placeholder="Назначение">
+  <span class="filter-label truncate">Назначение</span>
+  <i class="fas fa-chevron-down flex-shrink-0"></i>
+</button>
+      <ul class="filter-options hidden
+           absolute left-0 right-0  
+           mt-2 bg-white rounded-lg shadow-lg py-2 z-30">
+        <li><a href="#" data-value="office" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Офисные помещения</a></li>
+        <li><a href="#" data-value="production" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Производственные</a></li>
+        <li><a href="#" data-value="warehouse" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Складские</a></li>
+        <li><a href="#" data-value="retail" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Торговые площади</a></li>
+        <li><a href="#" data-value="land" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">Земельные участки</a></li>
+      </ul>
+    </div>
+
+    
+<div class="relative inline-block flex-[1_1_12rem]  min-w-[11rem]  max-w-[22rem]" data-filter-key="minArea">
+<button
+  class="filter-toggle w-full h-16 flex justify-between items-center text-lg
+         px-6 bg-gray-100 text-gray-700 hover:bg-indigo-600 hover:text-white transition
+         border border-gray-300 rounded-none"
+  data-placeholder="Площадь от"
+>
+  <span class="filter-label">Площадь от</span>
+  <i class="fas fa-chevron-down flex-shrink-0"></i>
+</button>
+
+  <ul class="filter-options hidden absolute left-0 right-0 mt-2 text-lg
+           min-w-full max-w-[min(28rem,90vw)]
+           bg-white rounded-lg shadow-lg py-2 z-30">
+    <li><a href="#" data-value="0"   class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">0 м²</a></li>
+    <li><a href="#" data-value="50"  class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">50 м²</a></li>
+    <li><a href="#" data-value="100" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">100 м²</a></li>
+    <li><a href="#" data-value="200" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">200 м²</a></li>
+  </ul>
+</div>
+
+
+    
+<div class="relative inline-block flex-[1_1_12rem]  min-w-[11rem]  max-w-[22rem] text-lg" data-filter-key="maxArea">
+  
+<button
+  class="filter-toggle flex items-center justify-between
+         w-full h-16 px-6
+         bg-gray-100 text-gray-700 hover:bg-indigo-600 hover:text-white transition
+         border border-gray-300 rounded-none"
+  data-placeholder="Площадь до"
+>
+  <span class="filter-label">Площадь до</span>
+  <i class="fas fa-chevron-down flex-shrink-0"></i>
+</button>
+
+  
+  <ul class="filter-options hidden absolute left-0 right-0 mt-2
+           min-w-full max-w-[min(28rem,90vw)]
+           bg-white rounded-lg shadow-lg py-2 z-30 text-lg">
+    <li><a href="#" data-value="100" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">100 м²</a></li>
+    <li><a href="#" data-value="200" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">200 м²</a></li>
+    <li><a href="#" data-value="500" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">500 м²</a></li>
+    <li><a href="#" data-value="1000" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">1 000 м²</a></li>
+  </ul>
+</div>
+
+
+
+    
+  <div class="w-full flex justify-center gap-3 mt-4 text-lg">
+  <button class="show-results bg-indigo-600 hover:bg-indigo-700 text-white h-20 px-8 text-base rounded-md text-lg">
+    Показать предложения
+  </button>
+    <!-- <a href="#mapSection"
+       class="flex items-center gap-1 h-10 px-6 rounded-md border border-indigo-600
+              text-indigo-600 hover:bg-indigo-50 transition"> <i class="fas fa-map-marker-alt"></i>
+      Смотреть на карте
+    </a> -->
+<!-- Мини-карта (кнопка) -->
+  <div id="mapThumbBtn" class="relative group cursor-pointer select-none">
+    <div class="relative h-20 w-96 sm:w-[28rem] rounded-md border border-indigo-600 shadow-sm overflow-hidden">
+      <div id="mapThumbCanvas" class="absolute inset-0"></div>
+      <div class="absolute inset-0 bg-black/20"></div>
+    </div>
+
+    <!-- ПОПОВЕР -->
+    <div class="pointer-events-none absolute z-50 opacity-0
+                group-hover:opacity-100 transition
+                -top-2 left-1/2 -translate-x-1/2 -translate-y-full">
+      <div class="rounded-xl shadow-2xl ring-1 ring-black/10 overflow-hidden">
+        <div class="relative w-[480px] h-[300px] bg-white">
+          <div id="mapThumbPreview" class="absolute inset-0"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<button id="openMapBtn" class="hidden"></button>
+
+
+</section>
+
+
+<section class="py-8 bg-white">
+  <div class="mx-auto w-full md:w-3/4 lg:w-2/3 px-4">
+    <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Бизнесы</h2>
+
+
+<div class="grid grid-cols-1 lg:grid-cols-1 gap-6 items-start">
+
+<div class="rounded-xl shadow-sm p-6 bg-gray-50 border border-gray-200 space-y-5">
+
+  <!-- Шаг 1 -->
+ <div>
+  <!-- <h3 class="text-lg font-semibold mb-3">Шаг 1. Выберите тип</h3> -->
+<p class="text-lg leading-relaxed text-gray-800">
+  Мы — компания, которая помогает подобрать недвижимость под ваш бизнес.
+  Выберите направление ниже — мы подскажем подкатегории и сразу покажем подходящие объекты:
+  <span id="bizInlineCats" class="inline-flex flex-wrap items-center gap-2"></span>
+</p>
+</div>
+
+  <!-- Шаг 2 -->
+  <div id="bizSubcatsWrap" class="hidden mt-4">
+    <h3 class="text-lg font-semibold mb-3">Что именно вы открываете?</h3>
+    <div id="bizSubcats" class="flex flex-wrap gap-2"></div>
+  </div>
+
+  <!-- Шаг 3 -->
+  <h3 class="text-xl font-semibold mb-4 hidden" data-results-title>Подходящие варианты</h3>
+  <div id="bizResultsWrap" class="hidden">
+    <div id="matchingCards" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </div>
+
+  <!-- пустое состояние (опционально) -->
+  <div id="bizEmpty" class="hidden  text-gray-600 rounded-lg px-4 py-8 text-center">
+    
+  </div>
+
+</div>
+
+
+      </div>
+    </div>
+   
+
+    <!-- Блок для карточек --> 
+    <div id="matchingCardsAll"
+         class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- карточки будут добавляться сюда  -->
+    </div>
+  </div>
+</section>
+
+
+
+<section class="bg-gray-50 pt-[50px] py-8">
+    <div class="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+
+
+        <div id="sitesBlock" class="bg-white rounded-lg shadow p-6 lg:col-span-2">
+            <h3 class="text-xl font-semibold mb-4">Площадки</h3>
+            <div id="siteList" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+        </div>
+
+
+                <div class="bg-white rounded-lg shadow p-4 lg:col-span-1">
+            <h3 class="text-xl font-semibold mb-4">Реклама</h3>
+
+            <div id="adSlider" class="relative overflow-hidden h-72">
+                <div id="adSlides" class="flex transition-transform duration-500 ease-linear h-full w-full">
+                    
+                </div>
+                <button id="adPrev"
+                    class="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full shadow bg-white bg-opacity-80 hover:bg-opacity-100 transition-all lg:flex hidden">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="adNext"
+                    class="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full shadow bg-white bg-opacity-80 hover:bg-opacity-100 transition-all lg:flex hidden">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+  
+
+
+
+
+
+
+    
+<section id="services" class="py-16 bg-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Услуги</h2>
+
+    <!-- Карточки -->
+    <div id="serviceCards" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <!-- сюда JS вставит карточки -->
+    </div>
+
+    <!-- Блок с описанием -->
+    <div id="serviceDetail" class="mt-12 grid md:grid-cols-2 gap-6 items-stretch hidden">
+      <!-- Фото -->
+      <div class="relative aspect-[4/3] md:aspect-[16/9]">
+        <img id="serviceImage" class="absolute inset-0 w-full h-full object-cover rounded-lg shadow" />
+      </div>
+      <!-- Описание -->
+      <div class="bg-gray-50 rounded-lg p-6 flex flex-col">
+        <h3 id="serviceTitle" class="text-2xl font-semibold mb-3"></h3>
+        <p id="serviceDesc" class="text-gray-700 mb-6"></p>
+<!-- Кнопка -->
+<div class="mt-auto">
+  <a id="serviceCta"
+     href="#"
+     class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 transition">
+    Оставить заявку <i class="fa-solid fa-arrow-right-long"></i>
+  </a>
+</div>
+
+<!-- Мини-форма (модалка) -->
+<div id="serviceFormModal"
+     class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-md relative">
+    <!-- Закрыть -->
+    <button id="closeServiceForm"
+            class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl">
+      &times;
+    </button>
+
+    <h3 class="text-xl font-semibold mb-4">Оставьте заявку</h3>
+
+<form id="serviceForm" class="space-y-4">
+  <!-- Услуга -->
+  <div>
+    <label class="block text-sm text-gray-600 mb-1">Услуга</label>
+    <input id="serviceFormTitle" type="text" readonly
+           class="w-full border px-3 py-2 rounded-md bg-gray-50" />
+    <input id="serviceFormSlug" type="hidden" name="service" />
+  </div>
+
+  <!-- Краткое описание -->
+  <p id="serviceFormHint" class="text-sm text-gray-500"></p>
+
+
+
+  <div>
+    <input name="name" type="text" placeholder="Ваше имя"
+           class="w-full border px-3 py-2 rounded-md focus:ring focus:ring-indigo-300" required>
+  </div>
+  <div>
+    <input name="phone" type="tel" placeholder="Телефон"
+           class="w-full border px-3 py-2 rounded-md focus:ring focus:ring-indigo-300" required>
+  </div>
+
+    <!-- Что нужно сделать -->
+  <div>
+    <label class="block text-sm text-gray-600 mb-1">Что нужно сделать</label>
+    <textarea name="task" id="serviceTask" rows="3"
+              class="w-full border px-3 py-2 rounded-md focus:ring focus:ring-indigo-300"
+              placeholder="Опишите задачу..."></textarea>
+  </div>
+
+  <button type="submit"
+          class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition">
+    Отправить
+  </button>
+</form>
+
+  </div>
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const ctaBtn  = document.getElementById("serviceCta");
+  const modal   = document.getElementById("serviceFormModal");
+  const closeBtn= document.getElementById("closeServiceForm");
+
+  const inputTitle = document.getElementById("serviceFormTitle");
+  const inputSlug  = document.getElementById("serviceFormSlug");
+  const form       = document.getElementById("serviceForm");
+
+  // ХЕЛПЕР: обновляем data-* у кнопки при смене услуги
+  // ВСТАВЬ ЭТО внутрь твоей функции selectService(svc, ...) сразу после renderDetail(svc):
+  // document.getElementById("serviceCta").dataset.serviceSlug  = svc.slug;
+  // document.getElementById("serviceCta").dataset.serviceTitle = svc.title;
+
+  // Открытие модалки
+  ctaBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // Берём данные из data-* (основной способ)
+    const slug  = ctaBtn.dataset.serviceSlug  || "";
+    const title = ctaBtn.dataset.serviceTitle || document.getElementById("serviceTitle")?.textContent || "";
+
+    inputTitle.value = title;
+    inputSlug.value  = slug;
+
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+  });
+
+  // Закрытие
+  function closeModal() {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+  }
+  closeBtn.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+  // Отправка формы (демо)
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    // data = { service: 'it', name: '...', phone: '...' }
+    console.log("Отправка заявки:", { ...data, serviceTitle: inputTitle.value });
+
+    // здесь вместо console.log отправляй fetch(...) на свой бэкенд
+
+    closeModal();
+    alert("Спасибо! Мы свяжемся с вами.");
+  });
+});
+</script>
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+let SERVICES = [];
+let servicesLoaded = false;
+
+async function loadServices() {
+  const { data, error } = await supabase
+    .from('services')
+    .select('slug, title, desc, form_hint, img, icon, sort, is_active')
+    .eq('is_active', true)
+    .order('sort', { ascending: true });
+
+  if (error) {
+    console.error('Supabase error:', error);
+    return [];
+  }
+  return (data || []).map(r => ({
+    slug: r.slug,
+    title: r.title,
+    desc: r.desc,
+    formHint: r.form_hint,
+    img: r.img,
+    icon: r.icon
+  }));
+}
+
+function renderCards() {
+  const container = document.getElementById("serviceCards");
+  container.innerHTML = "";
+  SERVICES.forEach((s) => {
+    const card = document.createElement("div");
+    card.className =
+      "bg-gray-50 hover:bg-gray-100 p-6 rounded-lg transition text-center cursor-pointer";
+    card.dataset.slug = s.slug;
+    card.innerHTML = `
+      <div class="text-blue-600 text-4xl mb-4"><i class="fas ${s.icon}"></i></div>
+      <h3 class="text-xl font-semibold mb-2">${s.title}</h3>
+      <p class="text-gray-600">${s.desc}</p>
+    `;
+    card.addEventListener("click", () => selectService(s.slug, { updateUrl: true }));
+    container.appendChild(card);
+  });
+}
+
+function renderDetail(svc) {
+  document.getElementById("serviceImage").src = svc.img;
+  document.getElementById("serviceImage").alt = svc.title;
+  document.getElementById("serviceTitle").textContent = svc.title;
+  document.getElementById("serviceDesc").textContent = svc.desc;
+  document.getElementById("serviceCta").href = "#request";
+  document.getElementById("serviceDetail").classList.remove("hidden");
+}
+
+function selectService(slug, { updateUrl } = { updateUrl: false }) {
+  const svc = SERVICES.find((s) => s.slug === slug) || SERVICES[0];
+  if (!svc) return;
+
+  renderDetail(svc);
+
+  const cta = document.getElementById("serviceCta");
+  if (cta) {
+    cta.dataset.serviceSlug  = svc.slug;
+    cta.dataset.serviceTitle = svc.title;
+  }
+
+  document.querySelectorAll("#serviceCards > div").forEach((el) => {
+    el.classList.remove("ring-2","ring-indigo-600","bg-white","shadow-lg");
+  });
+  const activeCard = document.querySelector(`#serviceCards > div[data-slug="${svc.slug}"]`);
+  activeCard?.classList.add("ring-2","ring-indigo-600","bg-white","shadow-lg");
+
+  if (updateUrl) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("service", svc.slug);
+    history.pushState({ service: svc.slug }, "", url);
+  }
+}
+
+async function initServices() {
+  // прелоадер по желанию:
+  document.getElementById("serviceCards").innerHTML =
+    '<div class="col-span-full text-center text-gray-500">Загрузка…</div>';
+
+  SERVICES = await loadServices();
+  servicesLoaded = true;
+
+  renderCards();
+
+  const param = new URL(window.location.href).searchParams.get("service");
+  selectService(param || (SERVICES[0]?.slug), { updateUrl: !param });
+}
+
+window.addEventListener("popstate", () => {
+  const param = new URL(window.location.href).searchParams.get("service");
+  if (servicesLoaded) selectService(param || (SERVICES[0]?.slug));
+});
+
+document.addEventListener("DOMContentLoaded", initServices);
+</script>
+
+
+
+    
+    <section id="mapSection" class="pt-16 bg-white">
+        <!-- <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">
+            Наши объекты на карте
+        </h2>
+        <div class="w-full overflow-hidden">
+            <div id="map" class="w-full h-[500px]"></div>
+        </div> -->
+
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
+<script>
+ymaps.ready(function () {
+  // гарантия наличия фильтров из твоего script.js
+  window.filters = window.filters || { place: null, purpose: null, minArea: null, maxArea: null };
+
+  const openBtn  = document.getElementById('openMapBtn');
+  const modal    = document.getElementById('mapModal');
+  const overlay  = modal?.querySelector('.modal-overlay');
+  const closeBtn = document.getElementById('closeMapBtn');
+  const mapEl    = document.getElementById('modalMap');
+
+  let map = null;
+  const groups = new Map();  // coordKey -> { coords, items:[], placemark }
+
+  // Соберём все объекты (добавим служебное _purpose)
+  const allItems = Object.entries(window.dataByPurpose || {})
+    .flatMap(([purpose, arr]) => (arr || []).map(it => ({ ...it, _purpose: purpose })))
+    .filter(it => Array.isArray(it.coordinates) && it.coordinates.length === 2);
+
+  // Группировка по координатам (одна метка — несколько объектов)
+  allItems.forEach(it => {
+    const key = it.coordinates.join(',');
+    if (!groups.has(key)) groups.set(key, { coords: it.coordinates.map(Number), items: [], placemark: null });
+    groups.get(key).items.push(it);
+  });
+
+  function createBalloonContent(itemsAtPoint) {
+    const first = itemsAtPoint[0];
+    const place = first.place;
+    const desc  = (window.placeDescriptions && window.placeDescriptions[place]) || 'Описание временно отсутствует.';
+    const total = itemsAtPoint.reduce((s, o) => s + Number(o.area || 0), 0);
+
+    if (itemsAtPoint.length === 1) {
+      const d = itemsAtPoint[0];
+      const detailUrl = `pages/detail.html?purpose=${encodeURIComponent(d._purpose)}&id=${d.id}`;
+      return `
+        <div style="padding:15px;font-family:Arial,sans-serif;">
+          <h3 style="margin:0 0 10px;color:#333;">${d.name}</h3>
+          <p style="margin-bottom:8px;">${desc}</p>
+          <p><strong>Площадь:</strong> ${d.area} м²</p>
+          <div style="margin-top:15px;">
+            <a href="${detailUrl}" style="color:#007bff;text-decoration:none;font-weight:bold;">Подробнее →</a>
+          </div>
+        </div>`;
+    }
+
+    const listUrl = `pages/list.html?place=${encodeURIComponent(place)}`;
+    return `
+      <div style="padding:15px;font-family:Arial,sans-serif;">
+        <h3 style="margin:0 0 10px;color:#333;">${place}</h3>
+        <p style="margin-bottom:8px;">${desc}</p>
+        <p><strong>Объектов:</strong> ${itemsAtPoint.length}</p>
+        <p><strong>Суммарная площадь:</strong> ${total} м²</p>
+        <div style="margin-top:15px;">
+          <a href="${listUrl}" style="color:#007bff;text-decoration:none;font-weight:bold;">Показать все объекты →</a>
+        </div>
+      </div>`;
+  }
+
+// единый layout для эмодзи 📍 (никаких preset'ов)
+const EmojiPinLayout = ymaps.templateLayoutFactory.createClass(
+  '<div style="position:absolute; transform:translate(-50%,-100%);' +
+  'font-size:40px; line-height:1; user-select:none;">📍</div>'
+);
+
+// создаёт плейсмарк с эмодзи
+function makeEmojiPlacemark(coords, props = {}) {
+  return new ymaps.Placemark(
+    Array.isArray(coords) ? coords.map(Number) : coords,
+    props,
+    {
+      iconLayout: EmojiPinLayout, // <- свой layout
+      // якорь примерно как у обычной метки
+      iconShape: { type: 'Circle', coordinates: [0, -30], radius: 10 },
+      zIndex: 500,
+      zIndexHover: 600
+    }
+  );
+}
+
+function ensureMap() {
+  if (map || !mapEl) return;
+
+  map = new ymaps.Map(
+    mapEl,
+    { center: [59.93, 30.33], zoom: 11, controls: ['zoomControl'] },
+    { suppressMapOpenBlock: true }
+  );
+
+  // на всякий случай убираем всё, что могло остаться
+  map.geoObjects.removeAll();
+
+  groups.forEach(group => {
+    const placeName = (group.items?.[0]?.place || '').trim();
+    const pm = makeEmojiPlacemark(group.coords, {
+      placeName,
+      hintContent: placeName ? `📍 ${placeName}` : undefined,
+      balloonContent: createBalloonContent(group.items)
+    });
+    group.placemark = pm;
+    map.geoObjects.add(pm);
+  });
+
+  // стартовый охват
+  const pts = [];
+  groups.forEach(g => pts.push(g.coords));
+  if (pts.length === 1) {
+    map.setCenter(pts[0], 14);
+  } else if (pts.length > 1) {
+    const b = ymaps.util.bounds.fromPoints(pts);
+    map.setBounds(b, { checkZoomRange: true, zoomMargin: 30 });
+  }
+}
+
+
+
+  function matchesFilters(group) {
+    const f = window.filters || {};
+    const items = group.items;
+
+    // place
+    if (f.place && group.placemark.properties.get('placeName') !== f.place) return false;
+
+    // purpose
+    if (f.purpose) {
+      const anyPurpose = items.some(it => it._purpose === f.purpose);
+      if (!anyPurpose) return false;
+    }
+
+    // area: хотя бы один объект попадает в диапазон
+    const minA = f.minArea != null ? Number(f.minArea) : null;
+    const maxA = f.maxArea != null ? Number(f.maxArea) : null;
+    if (minA != null || maxA != null) {
+      const ok = items.some(it => {
+        const a = Number(it.area || 0);
+        if (minA != null && a < minA) return false;
+        if (maxA != null && a > maxA) return false;
+        return true;
+      });
+      if (!ok) return false;
+    }
+
+    return true;
+}
+
+function applyFiltersAndFit() {
+  if (!map) return;
+
+  const VISIBLE_MAX_ZOOM  = 16; 
+  const SINGLE_POINT_ZOOM = 14; 
+
+  let visiblePoints = [];
+
+  groups.forEach(group => {
+    const visible = matchesFilters(group);
+    group.placemark.options.set('visible', visible);
+    if (visible) visiblePoints.push(group.coords);
+  });
+
+  if (visiblePoints.length === 0) {
+    map.setCenter([59.93, 30.33], 11);
+    return;
+  }
+
+  if (visiblePoints.length === 1) {
+    map.setCenter(visiblePoints[0], SINGLE_POINT_ZOOM);
+    return;
+  }
+
+  // Несколько точек — вписываем в экран
+  const bounds = ymaps.util.bounds.fromPoints(visiblePoints);
+  map.setBounds(bounds, { checkZoomRange: true, zoomMargin: 30 }).then(() => {
+    // Ограничим слишком сильное приближение
+    if (map.getZoom() > VISIBLE_MAX_ZOOM) {
+      map.setZoom(VISIBLE_MAX_ZOOM);
+    }
+  });
+}
+
+// layout создаём один раз
+const MINI_PIN_LAYOUT = ymaps.templateLayoutFactory.createClass(
+  '<div style="position:absolute;transform:translate(-50%,-100%);' +
+  'font-size:18px;line-height:1;user-select:none;">📍</div>'
+);
+
+function buildMiniCollectionPlaceOnly() {
+  const col = new ymaps.GeoObjectCollection();
+
+  const activePlace   = (window.filters?.place || '').trim();
+  const filterByPlace = activePlace.length > 0;
+
+  groups.forEach(g => {
+    const placeName = (g.items?.[0]?.place || '').trim();
+    if (filterByPlace && placeName !== activePlace) return;
+
+    const coords = Array.isArray(g.coords) && g.coords.length === 2
+      ? [Number(g.coords[0]), Number(g.coords[1])]
+      : null;
+    if (!coords) return;
+
+    const pm = new ymaps.Placemark(
+      coords,
+      { placeName, hintContent: placeName ? `📍 ${placeName}` : undefined },
+      {
+        iconLayout: MINI_PIN_LAYOUT,
+        iconShape: { type: 'Circle', coordinates: [0, -14], radius: 9 },
+        zIndex: 500,
+        zIndexHover: 600
+      }
+    );
+
+    col.add(pm);
+  });
+
+  return col;
+}
+
+
+
+
+
+// function fitPoints(map, points, maxZoom) {
+//   if (!points.length) return;
+//   if (points.length === 1) { map.setCenter(points[0], Math.min(maxZoom, 13)); return; }
+//   const b = ymaps.util.bounds.fromPoints(points);
+//   map.setBounds(b, { checkZoomRange: true, zoomMargin: 20 }).then(() => {
+//     if (map.getZoom() > maxZoom) map.setZoom(maxZoom);
+//   });
+// }
+
+// function pointsFromCollection(col) {
+//   const pts = [];
+//   col.each(obj => pts.push(obj.geometry.getCoordinates()));
+//   return pts;
+// }
+
+
+
+// === МИНИ-КАРТЫ ===========================================================
+let thumbMap = null;      // маленькая карта в строке фильтров
+let previewMap = null;    // большая превью-карта в поповере
+
+// function buildMiniCollectionFiltered() {
+//   const col = new ymaps.GeoObjectCollection();
+//   groups.forEach(g => {
+//     if (matchesFilters(g)) {
+//       col.add(new ymaps.Placemark(
+//         g.coords,
+//         {},
+//         { preset: 'islands#blueDotIcon' }   // компактная точка
+//       ));
+//     }
+//   });
+//   return col;
+// }
+
+function fitPoints(map, points, maxZoom) {
+  if (!points.length) return;
+  if (points.length === 1) {
+    map.setCenter(points[0], Math.min(maxZoom, 12));
+    return;
+  }
+  const b = ymaps.util.bounds.fromPoints(points);
+  map.setBounds(b, { checkZoomRange: true, zoomMargin: 20 }).then(() => {
+    if (map.getZoom() > maxZoom) map.setZoom(maxZoom);
+  });
+}
+
+function pointsFromCollection(col) {
+  const pts = [];
+  col.each(obj => pts.push(obj.geometry.getCoordinates()));
+  return pts;
+}
+
+function refreshMiniMaps() {
+  // строим точки ТОЛЬКО для выбранной площадки
+  const build = () => buildMiniCollectionPlaceOnly();
+
+  if (thumbMap) {
+    thumbMap.geoObjects.removeAll();
+    const col = build();
+    thumbMap.geoObjects.add(col);
+    fitPoints(thumbMap, pointsFromCollection(col), 13);
+    thumbMap.container.fitToViewport();
+  }
+
+  if (previewMap) {
+    previewMap.geoObjects.removeAll();
+    const col = build();
+    previewMap.geoObjects.add(col);
+    fitPoints(previewMap, pointsFromCollection(col), 14);
+    previewMap.container.fitToViewport();
+  }
+}
+
+function initThumbMap() {
+  const holder = document.getElementById('mapThumbCanvas');
+  if (!holder || thumbMap) return;
+
+  thumbMap = new ymaps.Map(holder, {
+    center: [59.93, 30.33], zoom: 11, controls: []
+  }, { suppressMapOpenBlock: true });
+
+  // отключаем все жесты — превью «немое»
+  thumbMap.behaviors.disable(['drag','scrollZoom','dblClickZoom','multiTouch','rightMouseButtonMagnifier']);
+
+  refreshMiniMaps(); // <- точки сразу по фильтрам
+
+  new ResizeObserver(() => thumbMap?.container.fitToViewport()).observe(holder);
+}
+
+function initPreviewMap() {
+  const holder = document.getElementById('mapThumbPreview');
+  if (!holder || previewMap) return;
+
+  previewMap = new ymaps.Map(holder, {
+    center: [59.93, 30.33], zoom: 11, controls: []
+  }, { suppressMapOpenBlock: true });
+
+  previewMap.behaviors.disable(['drag','scrollZoom','dblClickZoom','multiTouch','rightMouseButtonMagnifier']);
+
+  refreshMiniMaps(); 
+
+  new ResizeObserver(() => previewMap?.container.fitToViewport()).observe(holder);
+}
+
+// инициализируем маленькую карту сразу
+initThumbMap();
+
+// создаём большую при первом ховере
+const thumbBtn = document.getElementById('mapThumbBtn');
+thumbBtn?.addEventListener('mouseenter', () => {
+  if (!previewMap) initPreviewMap();
+  refreshMiniMaps();
+  setTimeout(() => previewMap?.container.fitToViewport(), 0);
+});
+
+// клик по мини-карте открывает твоё модальное окно
+thumbBtn?.addEventListener('click', () => {
+  document.getElementById('openMapBtn')?.click();
+});
+
+// КОГДА МЕНЯЮТСЯ ФИЛЬТРЫ — обновляем и мини-карты
+window.addEventListener('filters:changed', () => {
+  refreshMiniMaps();      // точки и рамка под фильтры
+});
+
+
+
+
+  function openModal() {
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    ensureMap();
+
+    // важно для YMaps, когда контейнер был скрыт
+    map.container.fitToViewport();
+
+    // применяем текущие фильтры
+    applyFiltersAndFit();
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  // Кнопки/оверлей/Esc
+  openBtn?.addEventListener('click', openModal);
+  closeBtn?.addEventListener('click', closeModal);
+  overlay?.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Если фильтры меняются «на лету», можно бросать событие:
+  // window.dispatchEvent(new CustomEvent('filters:changed'))
+  window.addEventListener('filters:changed', () => {
+    if (!map) return;
+    applyFiltersAndFit();
+  });
+});
+</script>
+
+
+
+    </section>
+
+    
+    <footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                
+                <div>
+                    <div class="flex items-center mb-4">
+                        
+                        <div class="ml-2 text-xl font-semibold text-white"> (Лого) Название компании</div>
+                    </div>
+                    <p class="mb-4">
+                        Ведущая компания по аренде недвижимости в Санкт-Петербурге
+                    </p>
+                    <div class="flex space-x-4">
+                        <!-- <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a> -->
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-vk"></i></a>
+                    </div>
+                </div>
+
+                
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Недвижимость</h3>
+                    <ul class="space-y-2">
+                        
+                        
+                        <li><a href="#" class="hover:text-white">Офисы</a></li>
+                        <li><a href="#" class="hover:text-white">Коммерческая недвижимость</a></li>
+                        
+                    </ul>
+                </div>
+
+                
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Услуги</h3>
+                    <ul class="space-y-2">
+                        
+                        <li><a href="#" class="hover:text-white">Аренда офисов</a></li>
+                        <li><a href="#" class="hover:text-white">Юридические услуги</a></li>
+                        <li><a href="#" class="hover:text-white">Оценка недвижимости</a></li>
+                        <li><a href="#" class="hover:text-white">Консультации</a></li>
+                    </ul>
+                </div>
+
+                
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Контакты</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-2"></i>
+                            <div>
+                                <a href="tel:+71231232827" class="hover:text-white">+7 (123) 123–28–27</a>
+                                <p class="text-sm text-gray-400">Ежедневно с 9:00 до 18:00</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <a href="mailto:info@Название компании.ru" class="hover:text-white">info@Название
+                                компании.ru</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>Санкт-Петербург, Невский пр. 100</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    © 2024 Название компании. Все права защищены.
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-white">Условия использования</a>
+                    <a href="#" class="hover:text-white">Политика конфиденциальности</a>
+                    <a href="#" class="hover:text-white">Карта сайта</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <div id="modal" class="modal fixed inset-0 z-50 flex items-center justify-center hidden">
+        <div class="modal-overlay absolute inset-0"></div>
+        <div class="modal-container bg-white w-full max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 px-6">
+                <div class="flex justify-between items-center pb-3">
+                    <h3 class="text-xl font-bold">Оставьте заявку</h3>
+                    <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <form id="contactForm" class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-gray-700 mb-1">Имя <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" id="name"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block text-gray-700 mb-1">Телефон <span
+                                class="text-red-500">*</span></label>
+                        <input type="tel" id="phone"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-gray-700 mb-1">Email</label>
+                        <input type="email" id="email"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label for="property-type" class="block text-gray-700 mb-1">Тип недвижимости</label>
+                        <select id="property-type"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Выберите тип</option>
+                            <option value="apartment">Квартира</option>
+                            <option value="house">Дом</option>
+                            <option value="office">Офис</option>
+                            <option value="commercial">Коммерческая</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-gray-700 mb-1">Сообщение</label>
+                        <textarea id="message" rows="3"
+                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                    <div class="text-sm text-gray-500">
+                        <span class="text-red-500">*</span> Обязательные поля. Мы свяжемся с вами в течение 30 минут.
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition">
+                        Отправить заявку
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="mapModal" class="fixed inset-0 z-50 hidden">
+  <div class="modal-overlay absolute inset-0 bg-black/50"></div>
+  <div class="modal-container bg-white w-[95vw] max-w-5xl max-h-[90vh]
+              mx-auto my-6 rounded-lg shadow-lg z-50 overflow-hidden
+              flex flex-col">
+    <div class="flex items-center justify-between px-5 py-3 border-b">
+      <h3 class="text-lg font-semibold">Наши объекты на карте</h3>
+      <button id="closeMapBtn" class="text-gray-500 hover:text-gray-700">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="p-4">
+      <div id="modalMap" class="w-full h-[70vh] rounded-lg"></div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // Вставьте из Project API (скрин у вас есть)
+  const SUPABASE_URL = 'https://stiqjgpqfqmcpnmdqmhi.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN0aXFqZ3BxZnFtY3BubWRxbWhpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc2NjcwOTQsImV4cCI6MjA3MzI0MzA5NH0.fR8LOlrEVQmeYwW383TTrODr9RXm77bwtC7aYtOOWBw';
+
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+</script>
+
+    
+</body>
+
+</html>
+

@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title id="page-title">(Лого) Название компании</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+        
+</head>
+<body class="flex flex-col min-h-screen bg-gray-50 font-sans">
+<script src="data.js"></script>
+  <!-- Header -->
+    <header class="bg-gray-100 sticky top-0 z-50 shadow-md">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="flex items-center">
+      <!-- <div class="text-2xl font-bold text-blue-600">RE</div> -->
+      <div class="ml-2 text-xl font-semibold">(Лого) Название компании</div>
+    </div>
+
+            <!-- мобильное меню -->
+            <nav id="mobileMenu" class="md:hidden fixed inset-x-0 top-16 bg-white shadow-md py-4 px-6 space-y-4 hidden">
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Недвижимость</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Услуги</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Компания</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Поддержка</a>
+                <a href="tel:+71231232827" class="block text-gray-700 hover:text-blue-600">+7 (123) 123‑28‑27</a>
+            </nav>
+
+
+            <div class="flex items-center space-x-4">
+                <button onclick="openModal()"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
+                    Заказать звонок
+                </button>
+                <div class="hidden md:block">
+                    <a href="tel:+71231232827" class="text-gray-700 hover:text-blue-600">+7 (123) 123–28–27</a>
+                </div>
+
+                <!-- <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button> -->
+                <button class="md:hidden text-gray-700 hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <style>
+        .hamburger-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .hamburger-menu {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .hamburger-menu span {
+            width: 20px;
+            height: 2px;
+            background: #374151;
+            transition: all 0.3s;
+        }
+    </style>
+
+    <script>
+
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        if (hamburgerMenu) {
+            hamburgerMenu.addEventListener('click', function () {
+                this.classList.toggle('active');
+                // Здесь можно добавить логику открытия/закрытия мобильного меню
+            });
+        }
+
+        const additionalStyles = `
+    .category-item.active {
+        background: #7c3aed !important;
+        color: white !important;
+        border-color: #7c3aed !important;
+    }
+    
+    .hamburger-menu.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger-menu.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger-menu.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+    
+    .project-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+`;
+    </script>
+
+  <main class="flex-grow container mx-auto px-4 py-8">
+    <!-- Breadcrumbs -->
+    <nav class="text-sm text-gray-500 mb-4" aria-label="breadcrumb">
+      <ol class="inline-flex list-none p-0">
+        <li class="flex items-center">
+          <a href="../index3.html" class="hover:text-gray-700">Главная</a>
+          <span class="mx-2">/</span>
+        </li>
+        <li class="flex items-center">
+          <span id="bc-list" class="text-gray-700">…</span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Page title -->
+    <h1 id="page-title-heading" class="text-3xl font-bold mb-6"></h1>
+
+    <!-- Фильтры -->
+<section class="container mx-auto mb-6">
+  <div class="flex flex-wrap gap-4">
+    <!-- Фильтр: Площадка -->
+    <div class="relative" data-filter-key="place">
+      <button
+        class="filter-toggle flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-purple-400 transition"
+        data-placeholder="Площадка"> <!-- data-placeholder для сброса -->
+        <span class="filter-label">Площадка</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      <ul class="filter-options hidden absolute left-0 mt-2 bg-white rounded-lg shadow-lg py-2 w-64">
+        <!-- Пункты будут генерироваться скриптом -->
+        <!-- Добавим пункт "Все площадки" программно -->
+      </ul>
+    </div>
+
+    <!-- Фильтр: Площадь от -->
+        <div class="relative" data-filter-key="minArea">
+          <button class="filter-toggle flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full">
+            <span class="filter-label"></span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <ul class="filter-options absolute bg-white shadow rounded mt-2 py-2 w-36"></ul>
+        </div>
+
+    <!-- Фильтр: Площадь до -->
+        <div class="relative" data-filter-key="maxArea">
+          <button class="filter-toggle flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full">
+            <span class="filter-label"></span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <ul class="filter-options absolute bg-white shadow rounded mt-2 py-2 w-36"></ul>
+        </div>
+      </div>
+  </div>
+</section>
+
+<style>
+  .filter-options { display: none; }
+  .filter-options.show { display: block; }
+  .filter-label--dynamic { font-style: italic; }
+</style>
+
+<script>
+// document.addEventListener('DOMContentLoaded', () => {
+
+
+//     const params   = new URLSearchParams(location.search);
+//     const purpose  = params.get('purpose') || 'land';
+//     const listData = (dataByPurpose[purpose] || []).slice(); 
+
+
+//     const sizes = listData.map(o => o.area);
+//     const minAll = Math.min(...sizes);
+//     const maxAll = Math.max(...sizes);
+
+
+//     function buildAreaOptions(key) {
+//       const wrapper = document.querySelector(`[data-filter-key="${key}"] .filter-options`);
+//       wrapper.innerHTML = sizes
+//         .filter((v,i,a) => a.indexOf(v) === i)   
+//         .sort((a,b) => a - b)
+//         .map(v => `<li>
+//                     <a href="#" data-value="${v}"
+//                        class="block px-4 py-2 hover:bg-purple-100">
+//                       ${v} м²
+//                     </a>
+//                   </li>`).join('');
+//     }
+//     buildAreaOptions('minArea');
+//     buildAreaOptions('maxArea');
+
+
+//     ['minArea','maxArea'].forEach(key => {
+//       const btn = document.querySelector(`[data-filter-key="${key}"] .filter-toggle .filter-label`);
+//       btn.textContent = key === 'minArea'
+//         ? `От ${minAll} м²`
+//         : `До ${maxAll} м²`;
+//       btn.classList.add('filter-label--dynamic');
+//     });
+
+
+
+//   const filters = {
+//     place:   params.get('place'),
+//     minArea: params.get('minArea'),
+//     maxArea: params.get('maxArea')
+//   };
+
+
+//   Object.entries(filters).forEach(([key, val]) => {
+//     if (!val) return;
+//     const wr    = document.querySelector(`.relative[data-filter-key="${key}"]`);
+//     const btn   = wr?.querySelector('.filter-toggle');
+//     const lbl   = btn?.querySelector('.filter-label');
+//     const opt   = wr?.querySelector(`.filter-options a[data-value="${val}"]`);
+//     if (opt && btn && lbl) {
+//       opt.classList.add('bg-purple-600','text-white');
+//       btn.classList.add('bg-purple-600','text-white');
+//       lbl.textContent = opt.textContent;
+//     }
+//   });
+
+
+//   function renderListings() {
+//     const purpose   = new URLSearchParams(location.search).get('purpose') || 'land';
+//     const all       = dataByPurpose[purpose] || [];
+//     const list      = all.filter(item => {
+//       if (filters.place   && item.place   !== filters.place)   return false;
+//       if (filters.minArea && item.area   < +filters.minArea)  return false;
+//       if (filters.maxArea && item.area   > +filters.maxArea)  return false;
+//       return true;
+//     });
+//     const container = document.getElementById('listings');
+//     container.innerHTML = '';
+//     list.forEach(item => {
+//       const a = document.createElement('a');
+//       a.href = `detail.html?purpose=${purpose}&id=${item.id}`;
+//       a.className = 'block bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition';
+//       a.innerHTML = `
+//         <img src="${item.img}" alt="${item.name}" class="w-full h-32 object-cover">
+//         <div class="p-4">
+//           <h3 class="font-semibold">${item.name}</h3>
+//           <p class="text-gray-600 text-sm">Подробнее ›</p>
+//         </div>`;
+//       container.append(a);
+//     });
+//   }
+//   renderListings();
+
+
+//   document.querySelectorAll('.relative[data-filter-key]').forEach(wr => {
+//     const key   = wr.dataset.filterKey;
+//     const btn   = wr.querySelector('.filter-toggle');
+//     const menu  = wr.querySelector('.filter-options');
+//     const items = menu.querySelectorAll('a');
+
+//     btn.addEventListener('click', e => {
+//       e.stopPropagation();
+
+//       document.querySelectorAll('.filter-options').forEach(m=>m.classList.remove('show'));
+//       menu.classList.toggle('show');
+//     });
+
+//     items.forEach(opt => {
+//       opt.addEventListener('click', e => {
+//         e.preventDefault();
+
+//         items.forEach(i=>i.classList.remove('bg-purple-600','text-white'));
+//         btn.classList.remove('bg-purple-600','text-white');
+
+
+//         filters[key] = opt.dataset.value;
+//         opt.classList.add('bg-purple-600','text-white');
+//         btn.classList.add('bg-purple-600','text-white');
+//         btn.querySelector('.filter-label').textContent = opt.textContent;
+//         menu.classList.remove('show');
+
+ 
+//         const p = new URLSearchParams(location.search);
+//         p.set(key, filters[key]);
+//         history.replaceState(null, '', `${location.pathname}?${p}`);
+
+//         renderListings();
+//       });
+//     });
+//   });
+
+
+//   document.addEventListener('click', ()=> {
+//     document.querySelectorAll('.filter-options.show')
+//       .forEach(m=>m.classList.remove('show'));
+//   });
+// });
+</script>
+
+
+    <!-- Listings grid -->
+    <div id="listings" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </main>
+
+<!-- Footer -->
+    <footer class="mt-auto bg-gray-900 text-gray-300 pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Column 1 -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <!-- <div class="text-2xl font-bold text-white">RE</div> -->
+                        <div class="ml-2 text-xl font-semibold text-white">(Лого) Название компании</div>
+                    </div>
+                    <p class="mb-4">
+                        Ведущая компания по аренде недвижимости в Санкт-Петербурге
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-vk"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Недвижимость</h3>
+                    <ul class="space-y-2">
+                        <!-- <li><a href="#" class="hover:text-white">Квартиры</a></li> -->
+                        <!-- <li><a href="#" class="hover:text-white">Дома</a></li> -->
+                        <li><a href="#" class="hover:text-white">Офисы</a></li>
+                        <li><a href="#" class="hover:text-white">Коммерческая недвижимость</a></li>
+                        <!-- <li><a href="#" class="hover:text-white">Новостройки</a></li> -->
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Услуги</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Аренда жилья</a></li>
+                        <li><a href="#" class="hover:text-white">Аренда офисов</a></li>
+                        <li><a href="#" class="hover:text-white">Юридические услуги</a></li>
+                        <li><a href="#" class="hover:text-white">Оценка недвижимости</a></li>
+                        <li><a href="#" class="hover:text-white">Консультации</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Контакты</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-2"></i>
+                            <div>
+                                <a href="tel:+71231232827" class="hover:text-white">+7 (123) 123–28–27</a>
+                                <p class="text-sm text-gray-400">Ежедневно с 9:00 до 21:00</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <a href="mailto:info@(Лого) Название компании.ru" class="hover:text-white">info@(Лого) Название компании.ru</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>Санкт-Петербург, Невский пр. 100</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    © 2024 (Лого) Название компании. Все права защищены.
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-white">Условия использования</a>
+                    <a href="#" class="hover:text-white">Политика конфиденциальности</a>
+                    <a href="#" class="hover:text-white">Карта сайта</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+  <script>
+    // Hamburger toggle
+    document.querySelector('.hamburger-menu').onclick = () => {
+      const m = document.getElementById('mobileMenu');
+      m.classList.toggle('hidden');
+    };
+// console.log(dataByPurpose.land);
+// 1) Data for all purposes
+// const dataByPurpose = {
+  
+// };
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Читаем purpose и фильтры из URL
+  const url = new URL(location);
+  const purposeFromUrl = url.searchParams.get('purpose'); // Может быть null
+  const filters = {
+    place: url.searchParams.get('place'), // Получаем как строку или null
+    minArea: url.searchParams.get('minArea'), // Получаем как строку или null
+    maxArea: url.searchParams.get('maxArea')  // Получаем как строку или null
+  };
+
+  // 2. Подписи для разных типов
+  const labels = {
+    land: 'Земельные участки',
+    office: 'Офисные помещения',
+    warehouse: 'Складские помещения',
+    production: 'Производственные',
+    retail: 'Торговые площади'
+  };
+
+  // 3. Определяем, какие данные показывать и устанавливаем заголовки
+  let dataToShow = [];
+  if (purposeFromUrl && dataByPurpose[purposeFromUrl]) {
+    // Сценарий 1: Есть purpose в URL - показываем только его
+    dataToShow = dataByPurpose[purposeFromUrl];
+    document.getElementById('bc-list').textContent = labels[purposeFromUrl];
+    document.getElementById('page-title-heading').textContent = labels[purposeFromUrl];
+    document.title = labels[purposeFromUrl];
+  } else {
+    // Сценарий 2: Нет purpose в URL - собираем ВСЕ данные в один массив
+    dataToShow = Object.values(dataByPurpose).flat();
+    document.getElementById('bc-list').textContent = 'Результаты поиска';
+    document.getElementById('page-title-heading').textContent = 'Результаты поиска';
+    document.title = 'Результаты поиска';
+  }
+
+  // 4. --- Генерация пунктов фильтров ---
+  // Собираем все возможные значения для фильтров из dataToShow (для инициализации)
+  let allPossiblePlaces = [];
+  let allPossibleAreas = [];
+
+  dataToShow.forEach(item => {
+      if (item.place && !allPossiblePlaces.includes(item.place)) {
+        allPossiblePlaces.push(item.place);
+      }
+      if (item.area !== undefined && !allPossibleAreas.includes(item.area)) {
+        allPossibleAreas.push(item.area);
+      }
+  });
+  allPossibleAreas.sort((a, b) => a - b);
+
+  // --- Генерация пунктов фильтра ПЛОЩАДКИ ---
+  const placeFilterWrapper = document.querySelector(`[data-filter-key="place"] .filter-options`);
+  if (placeFilterWrapper) {
+    placeFilterWrapper.innerHTML = ''; // Очищаем
+
+    // Добавляем пункты для каждой уникальной площадки из dataToShow
+    allPossiblePlaces.forEach(place => {
+         const li = document.createElement('li');
+         li.innerHTML = `<a href="#" data-value="${place}" class="block px-4 py-2 hover:bg-purple-100">${place}</a>`;
+         placeFilterWrapper.appendChild(li);
+    });
+  }
+
+  // --- Функция для генерации пунктов фильтров ПЛОЩАДИ ---
+  // Эта функция будет вызываться из renderListings с актуальными filteredData
+// --- Обновленная функция для генерации пунктов фильтров площади ---
+// Принимает ключ фильтра ('minArea' или 'maxArea') и отфильтрованные данные
+function buildAreaOptions(filterKey, currentFilteredData) {
+  const areaFilterWrapper = document.querySelector(`[data-filter-key="${filterKey}"] .filter-options`);
+  if (!areaFilterWrapper || !currentFilteredData) return; // Добавлена проверка на существование
+
+  // 1. Собираем уникальные площади ТОЛЬКО из currentFilteredData
+  // Это обеспечивает, что в списке будут только те значения, которые возможны при текущих фильтрах
+  const uniqueAreasFromFilteredData = [...new Set(currentFilteredData.map(item => item.area))].sort((a, b) => a - b);
+
+  // 2. Начинаем с этих уникальных площадей
+  let areasToShow = [...uniqueAreasFromFilteredData];
+
+  // 3. Применяем логику ограничения между minArea и maxArea
+  if (filterKey === 'minArea') {
+    // Для "Площадь от" показываем только площади, которые <= текущему filters.maxArea (если он задан)
+    if (filters.maxArea !== null && filters.maxArea !== "") {
+        const maxLimit = Number(filters.maxArea);
+        areasToShow = areasToShow.filter(area => area <= maxLimit);
+    }
+  } else if (filterKey === 'maxArea') {
+    // Для "Площадь до" показываем только площади, которые >= текущему filters.minArea (если он задан)
+    if (filters.minArea !== null && filters.minArea !== "") {
+        const minLimit = Number(filters.minArea);
+        areasToShow = areasToShow.filter(area => area >= minLimit);
+    }
+  }
+
+  // 4. Генерируем HTML для отфильтрованного и ограниченного списка
+  // Используем шаблонную строку для создания пунктов меню
+  const listItemsHtml = areasToShow.map(area => `
+    <li><a href="#" data-value="${area}" class="block px-4 py-2 hover:bg-purple-100">${area} м²</a></li>
+  `).join('');
+
+  // 5. Вставляем сгенерированные пункты в меню
+  areaFilterWrapper.innerHTML = listItemsHtml;
+}
+
+  // 5. Устанавливаем текст на кнопках фильтров в соответствии с URL или значениями по умолчанию
+  function updateFilterButtonLabels() {
+    // Для place
+    const placeWrapper = document.querySelector(`[data-filter-key="place"]`);
+    if (placeWrapper) {
+      const placeButton = placeWrapper.querySelector('.filter-toggle .filter-label');
+      const placeholder = placeWrapper.querySelector('.filter-toggle').dataset.placeholder || 'Площадка';
+      if (filters.place && filters.place !== "") {
+        const selectedOption = placeWrapper.querySelector(`.filter-options a[data-value="${filters.place}"]`);
+        if (selectedOption) {
+          placeButton.textContent = selectedOption.textContent;
+          placeWrapper.querySelector('.filter-toggle').classList.add('bg-purple-600', 'text-white');
+        } else {
+          placeButton.textContent = placeholder;
+          placeWrapper.querySelector('.filter-toggle').classList.remove('bg-purple-600', 'text-white');
+        }
+      } else {
+        placeButton.textContent = placeholder;
+        placeWrapper.querySelector('.filter-toggle').classList.remove('bg-purple-600', 'text-white');
+      }
+    }
+
+    // Для minArea
+    const minAreaWrapper = document.querySelector(`[data-filter-key="minArea"]`);
+    if (minAreaWrapper) {
+      const minAreaButton = minAreaWrapper.querySelector('.filter-toggle .filter-label');
+      const minAll = Math.min(...allPossibleAreas);
+      if (filters.minArea !== null && filters.minArea !== "") {
+        minAreaButton.textContent = `От ${filters.minArea} м²`;
+        minAreaWrapper.querySelector('.filter-toggle').classList.add('bg-purple-600', 'text-white');
+      } else {
+        minAreaButton.textContent = `От ${minAll} м²`;
+        minAreaWrapper.querySelector('.filter-toggle').classList.remove('bg-purple-600', 'text-white');
+      }
+    }
+
+    // Для maxArea
+    const maxAreaWrapper = document.querySelector(`[data-filter-key="maxArea"]`);
+    if (maxAreaWrapper) {
+      const maxAreaButton = maxAreaWrapper.querySelector('.filter-toggle .filter-label');
+      const maxAll = Math.max(...allPossibleAreas);
+      if (filters.maxArea !== null && filters.maxArea !== "") {
+        maxAreaButton.textContent = `До ${filters.maxArea} м²`;
+        maxAreaWrapper.querySelector('.filter-toggle').classList.add('bg-purple-600', 'text-white');
+      } else {
+        maxAreaButton.textContent = `До ${maxAll} м²`;
+        maxAreaWrapper.querySelector('.filter-toggle').classList.remove('bg-purple-600', 'text-white');
+      }
+    }
+  }
+  updateFilterButtonLabels();
+
+  // 6. --- Функция рендеринга ---
+// 6. --- Функция рендеринга ---
+function renderListings() {
+  // Фильтруем dataToShow (все объекты или объекты одной категории)
+  // в соответствии с текущими значениями в объекте filters
+  const filteredData = dataToShow.filter(item => {
+    // Фильтр по place (если указан и не "все")
+    if (filters.place && filters.place !== "" && item.place !== filters.place) {
+      return false;
+    }
+    // Фильтр по minArea (включительно, если указано и не "любая")
+    if (filters.minArea !== null && filters.minArea !== "" && item.area < Number(filters.minArea)) {
+      return false;
+    }
+    // Фильтр по maxArea (включительно, если указано и не "любая")
+    if (filters.maxArea !== null && filters.maxArea !== "" && item.area > Number(filters.maxArea)) {
+      return false;
+    }
+    // Если объект прошел все проверки, он включается в результат
+    return true;
+  });
+
+  // --- КЛЮЧЕВОЕ ИЗМЕНЕНИЕ ---
+  // После получения filteredData, обновляем пункты меню фильтров площади
+  // Передаем filteredData в buildAreaOptions для обоих фильтров
+  buildAreaOptions('minArea', filteredData);
+  buildAreaOptions('maxArea', filteredData);
+  // --- КОНЕЦ КЛЮЧЕВОГО ИЗМЕНЕНИЯ ---
+ updateAreaFilters(filteredData);
+  // Остальная часть функции renderListings для отрисовки карточек остается без изменений
+  const container = document.getElementById('listings');
+  container.innerHTML = '';
+
+  if (filteredData.length === 0) {
+    container.innerHTML = '<p class="col-span-full text-center text-gray-500">По заданным критериям объекты не найдены.</p>';
+    return;
+  }
+
+  // Рендерим ВСЕ найденные объекты в одной сетке
+  filteredData.forEach(item => {
+    // Определяем, к какой категории принадлежит item для ссылки detail.html
+    let itemPurpose = purposeFromUrl;
+    if (!itemPurpose) {
+      for (const [key, items] of Object.entries(dataByPurpose)) {
+          if (items.includes(item)) {
+              itemPurpose = key;
+              break;
+          }
+        }
+    }
+
+    // Обработка изображений
+    const imageUrl = Array.isArray(item.images) ? item.images[0] : item.images;
+
+    const a = document.createElement('a');
+    a.href = `detail.html?purpose=${itemPurpose || 'land'}&id=${item.id}`;
+    a.className = 'block bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition';
+    a.innerHTML = `
+        <img src="${imageUrl}" alt="${item.name}" class="w-full h-32 object-cover" onerror="this.src='https://placehold.co/400x200?text=Image+Not+Found'">
+        <div class="p-4">
+          <h3 class="font-semibold mb-1">${item.name}</h3>
+          <p class="text-gray-600 text-sm mb-2">Площадь: ${item.area.toLocaleString("ru-RU")} м²</p>
+          ${item.place ? `<p class="text-gray-500 text-xs mb-2">${item.place}</p>` : ''}
+          <p class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+            Подробнее <i class="fas fa-arrow-right ml-2"></i>
+          </p>
+        </div>`;
+    container.appendChild(a);
+  });
+}
+
+  // 7. --- Обработчики фильтров ---
+  function attachFilterHandlers() {
+    document.querySelectorAll('.relative[data-filter-key]').forEach(wrapper => {
+      const key = wrapper.dataset.filterKey;
+      const button = wrapper.querySelector('.filter-toggle');
+      const menu = wrapper.querySelector('.filter-options');
+
+      if (!button || !menu) return;
+
+      button.addEventListener('click', e => {
+        e.stopPropagation();
+        document.querySelectorAll('.filter-options.show').forEach(m => m.classList.remove('show'));
+        menu.classList.toggle('show');
+      });
+
+      menu.querySelectorAll('a').forEach(option => {
+        option.addEventListener('click', e => {
+          e.preventDefault();
+
+          const selectedValue = option.dataset.value;
+          const selectedText = option.textContent.trim();
+
+          // --- ЛОГИКА: Переключение фильтра ---
+          // Если клик по уже выбранному значению или по пустому значению (например, сброс) - сбрасываем фильтр
+          const shouldReset = (filters[key] === selectedValue) || (selectedValue === "" || selectedValue === undefined);
+
+          // 1. Визуальный сброс ВСЕГДА (проще сбросить всё и потом выставить новое)
+          menu.querySelectorAll('a').forEach(i => i.classList.remove('bg-purple-600', 'text-white'));
+          button.classList.remove('bg-purple-600', 'text-white');
+
+          // 2. Определяем, нужно ли обновлять списки площадей
+          const isAreaFilter = (key === 'minArea' || key === 'maxArea');
+
+          // 3. Применяем фильтр (установка или сброс)
+          let filtersChanged = false; // Флаг, изменился ли какой-либо фильтр
+          let areaFiltersCorrected = false; // Флаг, корректировались ли фильтры площади из-за правила
+
+          if (shouldReset) {
+            // --- СБРОС ФИЛЬТРА ---
+            if (filters[key] !== undefined) { // Проверяем, был ли фильтр установлен
+                delete filters[key];
+                filtersChanged = true;
+            }
+            // Сброс текста кнопки
+            const placeholder = button.dataset.placeholder || (key === 'place' ? 'Площадка' : `Выберите ${key}`);
+            button.querySelector('.filter-label').textContent = placeholder;
+
+          } else {
+            // --- УСТАНОВКА ФИЛЬТРА ---
+            // Правило: minArea не может быть больше maxArea и наоборот
+            if (key === 'minArea' && filters.maxArea !== null && filters.maxArea !== "" && Number(selectedValue) > Number(filters.maxArea)) {
+                // Новый minArea > текущий maxArea -> сбрасываем maxArea
+                delete filters.maxArea;
+                areaFiltersCorrected = true;
+                // Сброс UI maxArea
+                const maxAreaWrapper = document.querySelector(`[data-filter-key="maxArea"]`);
+                if (maxAreaWrapper) {
+                    const maxAreaButton = maxAreaWrapper.querySelector('.filter-toggle');
+                    const maxAll = Math.max(...allPossibleAreas);
+                    maxAreaButton.querySelector('.filter-label').textContent = `До ${maxAll} м²`;
+                    maxAreaButton.classList.remove('bg-purple-600', 'text-white');
+                    maxAreaWrapper.querySelectorAll('a').forEach(a => a.classList.remove('bg-purple-600', 'text-white'));
+                }
+                // Обновляем URL для maxArea (позже)
+            }
+            if (key === 'maxArea' && filters.minArea !== null && filters.minArea !== "" && Number(selectedValue) < Number(filters.minArea)) {
+                // Новый maxArea < текущий minArea -> сбрасываем minArea
+                delete filters.minArea;
+                areaFiltersCorrected = true;
+                // Сброс UI minArea
+                const minAreaWrapper = document.querySelector(`[data-filter-key="minArea"]`);
+                if (minAreaWrapper) {
+                    const minAreaButton = minAreaWrapper.querySelector('.filter-toggle');
+                    const minAll = Math.min(...allPossibleAreas);
+                    minAreaButton.querySelector('.filter-label').textContent = `От ${minAll} м²`;
+                    minAreaButton.classList.remove('bg-purple-600', 'text-white');
+                    minAreaWrapper.querySelectorAll('a').forEach(a => a.classList.remove('bg-purple-600', 'text-white'));
+                }
+                // Обновляем URL для minArea (позже)
+            }
+
+            // Устанавливаем новый фильтр
+            if (filters[key] !== selectedValue) { // Проверяем, действительно ли значение изменилось
+                filters[key] = selectedValue;
+                filtersChanged = true;
+            }
+
+            // Визуальное выделение
+            option.classList.add('bg-purple-600', 'text-white');
+            button.classList.add('bg-purple-600', 'text-white');
+
+            // Обновляем текст кнопки
+            if (key === 'minArea' || key === 'maxArea') {
+              button.querySelector('.filter-label').textContent = key === 'minArea' ? `От ${selectedValue} м²` : `До ${selectedValue} м²`;
+            } else if (key === 'place') {
+              button.querySelector('.filter-label').textContent = selectedText;
+            }
+          }
+
+          // 4. Закрытие меню
+          menu.classList.remove('show');
+
+          // 5. Обновление URL (если фильтры изменились или были скорректированы)
+          if (filtersChanged || areaFiltersCorrected) {
+              const currentUrl = new URL(window.location);
+              if (shouldReset || selectedValue === "" || selectedValue === undefined) {
+                currentUrl.searchParams.delete(key);
+              } else {
+                currentUrl.searchParams.set(key, selectedValue);
+              }
+              // Перепроверяем и обновляем URL для скорректированных фильтров площади
+              if (areaFiltersCorrected) {
+                  if (key === 'minArea' && filters.maxArea === undefined) {
+                      currentUrl.searchParams.delete('maxArea');
+                  }
+                  if (key === 'maxArea' && filters.minArea === undefined) {
+                      currentUrl.searchParams.delete('minArea');
+                  }
+              }
+              // Сохраняем purpose, если он был
+              if (purposeFromUrl && !currentUrl.searchParams.has('purpose')) {
+                currentUrl.searchParams.set('purpose', purposeFromUrl);
+              }
+              window.history.pushState(null, '', currentUrl);
+          }
+
+          // 6. Перерисовка списка и обновление пунктов фильтров площади
+          // Вызываем всегда, так как renderListings теперь обновляет пункты фильтров
+          renderListings();
+        });
+      });
+    });
+
+    // Клик вне фильтров - закрываем меню
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.filter-options.show').forEach(m => m.classList.remove('show'));
+    });
+  }
+
+    // --- Новая функция для обновления пунктов фильтров площади ---
+  // Она принимает уже отфильтрованные данные для генерации актуальных списков
+  function updateAreaFilters(filteredData) {
+    // 1. Получаем уникальные площади из текущего результата фильтрации
+    const uniqueAreas = [...new Set(filteredData.map(item => item.area))].sort((a, b) => a - b);
+
+    // 2. Обновляем фильтр "Площадь от" (minArea)
+    const minAreaMenu = document.querySelector('[data-filter-key="minArea"] .filter-options');
+    if (minAreaMenu) {
+      // Фильтруем: оставляем площади, которые <= текущему filters.maxArea (если он задан)
+      let minAreasToShow = uniqueAreas;
+      if (filters.maxArea !== null && filters.maxArea !== "") {
+        const maxLimit = Number(filters.maxArea);
+        minAreasToShow = minAreasToShow.filter(area => area <= maxLimit);
+      }
+      // Генерируем и вставляем пункты
+      minAreaMenu.innerHTML = minAreasToShow.map(area => `
+        <li><a href="#" data-value="${area}" class="block px-4 py-2 hover:bg-purple-100">${area} м²</a></li>
+      `).join('');
+    }
+
+    // 3. Обновляем фильтр "Площадь до" (maxArea)
+    const maxAreaMenu = document.querySelector('[data-filter-key="maxArea"] .filter-options');
+    if (maxAreaMenu) {
+      // Фильтруем: оставляем площади, которые >= текущему filters.minArea (если он задан)
+      let maxAreasToShow = uniqueAreas;
+      if (filters.minArea !== null && filters.minArea !== "") {
+        const minLimit = Number(filters.minArea);
+        maxAreasToShow = maxAreasToShow.filter(area => area >= minLimit);
+      }
+      // Генерируем и вставляем пункты
+      maxAreaMenu.innerHTML = maxAreasToShow.map(area => `
+        <li><a href="#" data-value="${area}" class="block px-4 py-2 hover:bg-purple-100">${area} м²</a></li>
+      `).join('');
+    }
+  }
+
+  // 8. Первичный вызов
+  // Сначала рендерим, чтобы инициализировать пункты фильтров площади
+  renderListings();
+  // Затем навешиваем обработчики
+  attachFilterHandlers();
+});
+</script>
+
+
+</body>
+</html>

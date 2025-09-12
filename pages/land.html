@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title id="page-title">Участок – RentEstate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-50 font-sans">
+
+  <!-- Header -->
+    <header class="bg-gray-100 sticky top-0 z-50 shadow-md">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="flex items-center">
+      <div class="text-2xl font-bold text-blue-600">RE</div>
+      <div class="ml-2 text-xl font-semibold">RentEstate</div>
+    </div>
+
+            <!-- мобильное меню -->
+            <nav id="mobileMenu" class="md:hidden fixed inset-x-0 top-16 bg-white shadow-md py-4 px-6 space-y-4 hidden">
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Недвижимость</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Услуги</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Компания</a>
+                <a href="#" class="block text-gray-700 hover:text-blue-600">Поддержка</a>
+                <a href="tel:+71231232827" class="block text-gray-700 hover:text-blue-600">+7 (123) 123‑28‑27</a>
+            </nav>
+
+
+            <div class="flex items-center space-x-4">
+                <button onclick="openModal()"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">
+                    Заказать звонок
+                </button>
+                <div class="hidden md:block">
+                    <a href="tel:+71231232827" class="text-gray-700 hover:text-blue-600">+7 (123) 123–28–27</a>
+                </div>
+
+                <!-- <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button> -->
+                <button class="md:hidden text-gray-700 hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <style>
+        .hamburger-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .hamburger-menu {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .hamburger-menu span {
+            width: 20px;
+            height: 2px;
+            background: #374151;
+            transition: all 0.3s;
+        }
+    </style>
+
+    <script>
+
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        if (hamburgerMenu) {
+            hamburgerMenu.addEventListener('click', function () {
+                this.classList.toggle('active');
+                // Здесь можно добавить логику открытия/закрытия мобильного меню
+            });
+        }
+
+        const additionalStyles = `
+    .category-item.active {
+        background: #7c3aed !important;
+        color: white !important;
+        border-color: #7c3aed !important;
+    }
+    
+    .hamburger-menu.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger-menu.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger-menu.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+    
+    .project-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+`;
+    </script>
+
+
+  <main class="flex-grow container mx-auto px-4 py-8">
+
+    <!-- Хлебные крошки -->
+    <nav class="text-sm text-gray-500 mb-4" aria-label="breadcrumb">
+      <ol class="inline-flex list-none p-0">
+        <li class="flex items-center">
+          <a href="index.html" class="hover:text-gray-700">Главная</a>
+          <span class="mx-2">/</span>
+        </li>
+        <li class="flex items-center">
+          <a href="lands.html" class="hover:text-gray-700">Земельные участки</a>
+          <span class="mx-2">/</span>
+        </li>
+        <li id="bc-current" class="flex items-center text-gray-700">
+          <!-- сюда подставится название участка -->
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Слайдер сразу под хлебными крошками -->
+    <div class="relative bg-white rounded-lg shadow overflow-hidden mb-8">
+      <img id="land-img" src="" alt="" class="w-full h-64 object-cover">
+      <button id="prevBtn"
+              class="absolute left-2 top-1/2 transform -translate-y-1/2
+                     text-3xl text-white bg-black bg-opacity-30 p-2 rounded-full
+                     hover:bg-opacity-50">‹</button>
+      <button id="nextBtn"
+              class="absolute right-2 top-1/2 transform -translate-y-1/2
+                     text-3xl text-white bg-black bg-opacity-30 p-2 rounded-full
+                     hover:bg-opacity-50">›</button>
+    </div>
+
+    <!-- Основная сетка: описание и эксперт -->
+    <div class="grid lg:grid-cols-3 gap-6 mb-12">
+      <!-- Описание участка -->
+      <section class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
+        <h1 id="land-name" class="text-3xl font-bold mb-4"></h1>
+        <p id="land-place" class="text-gray-600 mb-2"></p>
+        <p id="land-area" class="mb-6"></p>
+        <!-- Здесь можно расширить описание... -->
+        <!-- <h2 class="text-xl font-semibold mb-3">Описание</h2> -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <ul class="list-disc list-inside text-gray-700">
+            <!-- дополнительные пункты -->
+          </ul>
+          <ul class="list-disc list-inside text-gray-700">
+            <!-- тех. характеристики -->
+          </ul>
+        </div>
+      </section>
+      <!-- Эксперт -->
+      <aside class="bg-white rounded-lg shadow p-6 flex flex-col justify-between">
+        <div>
+          <h3 class="font-semibold mb-2">ФИО эксперта</h3>
+          <p class="text-gray-600 mb-4">+7 (123) 123‑45‑67</p>
+          <p class="text-gray-600">expert@rentestate.ru</p>
+        </div>
+        <button class="mt-6 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded">Консультация эксперта</button>
+      </aside>
+    </div>
+
+
+        <!-- Описание -->
+    <section class="bg-white rounded-lg shadow p-6 mb-12">
+      <h2 class="text-xl font-semibold mb-4">Описание</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Характеристики -->
+        <div>
+          <h3 class="font-medium mb-2">Характеристики</h3>
+          <ul class="list-disc list-inside text-gray-700">
+            <li id="land-place"></li>
+            <li id="land-area"></li>
+            <!-- добавьте здесь другие пункты -->
+          </ul>
+        </div>
+        <!-- Тех. характеристики -->
+        <div>
+          <h3 class="font-medium mb-2">Технические характеристики</h3>
+          <ul class="list-disc list-inside text-gray-700">
+            <li>Тип грунта: суглинок</li>
+            <li>Коммуникации: вода, электричество</li>
+            
+          </ul>
+        </div>
+      </div>
+      <p class="mt-6 text-sm text-gray-500">
+        Для получения более подробной информации заполните форму обратной связи или свяжитесь по указанным контактам.
+      </p>
+    </section>
+
+        <!-- Похожие участки -->
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold mb-4">Вас могут заинтересовать</h2>
+      <div id="related" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+    <footer class="mt-auto bg-gray-900 text-gray-300 pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Column 1 -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="text-2xl font-bold text-white">RE</div>
+                        <div class="ml-2 text-xl font-semibold text-white">RentEstate</div>
+                    </div>
+                    <p class="mb-4">
+                        Ведущая компания по аренде недвижимости в Санкт-Петербурге
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-vk"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Недвижимость</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Квартиры</a></li>
+                        <li><a href="#" class="hover:text-white">Дома</a></li>
+                        <li><a href="#" class="hover:text-white">Офисы</a></li>
+                        <li><a href="#" class="hover:text-white">Коммерческая недвижимость</a></li>
+                        <li><a href="#" class="hover:text-white">Новостройки</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Услуги</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Аренда жилья</a></li>
+                        <li><a href="#" class="hover:text-white">Аренда офисов</a></li>
+                        <li><a href="#" class="hover:text-white">Юридические услуги</a></li>
+                        <li><a href="#" class="hover:text-white">Оценка недвижимости</a></li>
+                        <li><a href="#" class="hover:text-white">Консультации</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Контакты</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-2"></i>
+                            <div>
+                                <a href="tel:+71231232827" class="hover:text-white">+7 (123) 123–28–27</a>
+                                <p class="text-sm text-gray-400">Ежедневно с 9:00 до 21:00</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <a href="mailto:info@rentestate.ru" class="hover:text-white">info@rentestate.ru</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>Санкт-Петербург, Невский пр. 100</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    © 2024 RentEstate. Все права защищены.
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-white">Условия использования</a>
+                    <a href="#" class="hover:text-white">Политика конфиденциальности</a>
+                    <a href="#" class="hover:text-white">Карта сайта</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <script>
+    const landsData = [
+      { id:1, name: 'Площадка A', place:'Кушелевская дорога', area:120, images:[
+          'https://images.unsplash.com/photo-1688673698367-e8f0274e11d9?w=500&auto=format&fit=crop&q=60',
+          'https://images.unsplash.com/photo-1685897938422-31c6f431e87e?w=500&auto=format&fit=crop&q=60',
+          'https://images.unsplash.com/photo-1515575550379-b923bc71669b?w=800&auto=format&fit=crop&q=60'
+        ]
+      },
+      { id:2, name: 'Площадка B', place:'Лабораторный пр.', area:80, images:[
+          'https://images.unsplash.com/photo-1637603933595-2233155a67eb?w=800&auto=format&fit=crop&q=60',
+          'https://images.unsplash.com/photo-1599696850225-a0c950381056?w=800&auto=format&fit=crop&q=60'
+        ]
+      },
+      { id:3, name: 'Площадка C', place:'Бестужевская', area:65, images:[
+          'https://images.unsplash.com/photo-1640881100814-453f76b431be?w=800&auto=format&fit=crop&q=60'
+        ]
+      },
+      { id:4, name: 'Площадка D', place:'Сестрорецк', area:350, images:[
+          'https://images.unsplash.com/photo-1527506620952-3309b8ed6a1b?w=800&auto=format&fit=crop&q=60'
+        ]
+      },
+    ];
+
+    // Получаем id из URL
+    const params = new URLSearchParams(window.location.search);
+    const id     = +params.get('id');
+    const land   = landsData.find(l => l.id === id);
+    if (!land) {
+      document.querySelector('main').innerHTML = '<p class="text-center text-red-500">Участок не найден.</p>';
+      throw '';
+    }
+
+    // Заполняем данные
+    document.title = `${land.name} – RentEstate`;
+    document.getElementById('page-title').textContent = `${land.name} – RentEstate`;
+    document.getElementById('bc-current').textContent     = land.name;
+    document.getElementById('land-name').textContent     = land.name;
+    document.getElementById('land-place').textContent    = `Площадка: ${land.place}`;
+    document.getElementById('land-area').textContent     = `Площадь: ${land.area} м²`;
+
+    // Карусель
+  const imgs = land.images;
+  const imgEl = document.getElementById('land-img');
+  let idx = 0;
+  function show(i) {
+    idx = (i + imgs.length) % imgs.length;
+    imgEl.src = imgs[idx];
+    imgEl.alt = `${land.name} фото ${idx+1}`;
+  }
+  document.getElementById('prevBtn').onclick = () => show(idx - 1);
+  document.getElementById('nextBtn').onclick = () => show(idx + 1);
+
+  // показываем первый слайд
+  show(0);
+
+  // автоматическое перелистывание
+  const autoplayInterval = setInterval(() => {
+    show(idx + 1);
+  }, 2000);
+
+  // опционально: при наведении мыши на слайдер останавливаем автоплей
+  const sliderContainer = document.querySelector('.relative.bg-white.rounded-lg.shadow.overflow-hidden');
+  sliderContainer.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
+  sliderContainer.addEventListener('mouseleave', () => {
+    // перезапускаем автоплей
+    setInterval(() => show(idx + 1), 5000);
+  });
+
+    // Похожие
+    const related = document.getElementById('related');
+    landsData.filter(l=>l.id!==id).slice(0,4).forEach(l => {
+      a.href = `/pages/land.html?id=${l.id}`;
+      a.className = 'block bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition';
+      a.innerHTML = `
+        <img src="${l.images[0]}" alt="${l.name}" class="w-full h-32 object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold">${l.name}</h3>
+          <p class="text-gray-600 text-sm">Подробнее ›</p>
+        </div>`;
+      related.append(a);
+    });
+  </script>
+
+</body>
+</html>
