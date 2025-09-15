@@ -779,13 +779,8 @@ if (placeDescEl) {
     return;
   }
 
-  const fixValue = (v='') => {
-    let s = String(v).trim();
-    return s.replace(/\bодоотведени[ея]\b/gi, 'водоотведения'); // исправляем опечатку
-  };
-
   const toRow = (tc) => {
-    const value = fixValue(tc.value || tc.text || tc.name || '');
+    const value = (tc.value || tc.text || tc.name || '').trim();
     return `
       <li class="flex items-center gap-2">
         <span class="text-green-600">✔</span>
@@ -796,6 +791,7 @@ if (placeDescEl) {
 
   host.innerHTML = arr.map(toRow).join('');
 })();
+
 
 
   // ====== Инфраструктура (новые ID)
@@ -1254,6 +1250,7 @@ if (placeDescEl) {
 
 
 </html>
+
 
 
 
