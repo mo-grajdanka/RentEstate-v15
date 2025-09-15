@@ -829,49 +829,45 @@ if (placeDescEl) {
 
   container.innerHTML = '<div class="col-span-full text-center text-gray-500">Загрузка…</div>';
 
-  (async () => {
-    try {
-      // читаем метаданные из БД
-      const { data, error } = await sb
-        .from('ecosystem_logos')
-        .select('path, href, alt')
-        .eq('is_active', true)
-        .order('sort', { ascending: true });
+(async () => {
+  const { data, error } = await sb
+    .from('ecosystem_logos')
+    .select('path, href, alt')
+    .eq('is_active', true)
+    .eq('object_id', item.id)    // ← фильтр по объекту
+    .order('sort', { ascending: true });
 
-      if (error) throw error;
+  if (error) {
+    console.error(error);
+    return;
+  }
 
-      // строим публичные URL из бакета ecosystem
-      const logos = (data || []).map(row => {
-        const { data: pub } = sb.storage.from('ecosystem').getPublicUrl(row.path);
-        return {
-          src:  pub.publicUrl,
-          href: row.href || null,
-          alt:  row.alt  || 'Логотип партнёра'
-        };
-      });
+  const logos = (data || []).map(row => {
+    const { data: pub } = sb.storage.from('ecosystem').getPublicUrl(row.path);
+    return {
+      src: pub.publicUrl,
+      href: row.href || null,
+      alt: row.alt || 'Логотип партнёра'
+    };
+  });
 
-      if (!logos.length) {
-        container.innerHTML = '<div class="col-span-full text-center text-gray-500">Пока нет логотипов</div>';
-        return;
-      }
+  // рендерим
+  const container = document.getElementById('pp-infra-ecosystem');
+  if (!logos.length) {
+    container.innerHTML = '<div class="col-span-full text-center text-gray-500">Пока нет логотипов</div>';
+    return;
+  }
+  container.innerHTML = logos.map(l => `
+    <div class="flex items-center justify-center p-2">
+      ${l.href ? `<a href="${l.href}" target="_blank" rel="noopener noreferrer">` : ''}
+        <img src="${l.src}" alt="${l.alt}"
+             class="h-20 md:h-24 object-contain max-w-[200px] opacity-50 hover:opacity-100 transition"
+             onerror="this.src='https://placehold.co/160x56?text=Logo'">
+      ${l.href ? `</a>` : ''}
+    </div>
+  `).join('');
+})();
 
-      container.innerHTML = logos.map(l => `
-        <div class="flex items-center justify-center p-2">
-          ${l.href ? `<a href="${l.href}" target="_blank" rel="noopener noreferrer">` : ''}
-            <img
-              src="${l.src}" alt="${l.alt}"
-              loading="lazy" decoding="async"
-              class="h-20 md:h-24 object-contain max-w-[200px] opacity-50 hover:opacity-100 transition"
-              onerror="this.src='https://placehold.co/160x56?text=Logo'">
-          ${l.href ? `</a>` : ''}
-        </div>
-      `).join('');
-
-    } catch (e) {
-      console.error('Ecosystem logos error:', e);
-      container.innerHTML = '<div class="col-span-full text-center text-red-500">Ошибка загрузки логотипов</div>';
-    }
-  })();
 })();
 
 
@@ -1240,3 +1236,4 @@ if (placeDescEl) {
 
 
 </html>
+
