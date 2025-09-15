@@ -309,12 +309,11 @@
       <div id="pp-biz" class="flex-1 text-gray-900"></div>
     </div>
 
-    <div class="flex gap-3">
-      <div class="w-48 text-gray-500 uppercase">Тех. характеристики:</div>
-      <div id="pp-tech" class="flex-1 text-gray-900">
-       
-      </div>
-    </div>
+<div class="flex gap-3">
+  <div class="w-48 text-gray-500 uppercase">Тех. характеристики:</div>
+  <ul id="pp-tech" class="grid grid-cols-2 gap-x-6 gap-y-2 flex-1"></ul>
+</div>
+
   </div>
 
   <h3 class="text-center text-gray-700 font-medium mt-2 uppercase ">Инфраструктура</h3>
@@ -770,15 +769,34 @@ if (placeDescEl) {
   //   host.replaceChildren(document.createTextNode(text));
   // })();
 
-  (function fillTech() {
-  const host = document.getElementById('pp-tech');
+(function fillTech() {
+  const host = document.getElementById('pp-tech'); // <ul>
   if (!host) return;
 
   const arr = Array.isArray(item.technicalCharacteristics) ? item.technicalCharacteristics : [];
-  host.textContent = arr.length
-    ? arr.map(tc => [tc.label, tc.value, tc.text, tc.name].filter(Boolean).join(' ')).join(' · ')
-    : 'Информация отсутствует.';
+  if (!arr.length) {
+    host.innerHTML = '<li class="col-span-full text-gray-500">Информация отсутствует.</li>';
+    return;
+  }
+
+  const fixValue = (v='') => {
+    let s = String(v).trim();
+    return s.replace(/\bодоотведени[ея]\b/gi, 'водоотведения'); // исправляем опечатку
+  };
+
+  const toRow = (tc) => {
+    const value = fixValue(tc.value || tc.text || tc.name || '');
+    return `
+      <li class="flex items-center gap-2">
+        <span class="text-green-600">✔</span>
+        <span>${value}</span>
+      </li>
+    `;
+  };
+
+  host.innerHTML = arr.map(toRow).join('');
 })();
+
 
   // ====== Инфраструктура (новые ID)
 // Транспортная
@@ -1236,6 +1254,7 @@ if (placeDescEl) {
 
 
 </html>
+
 
 
 
