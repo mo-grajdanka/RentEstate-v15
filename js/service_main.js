@@ -44,6 +44,19 @@ document.addEventListener('DOMContentLoaded', function () {
     return total;
   }
 
+  // === image helpers ===
+const FALLBACK_SM = 'https://placehold.co/400x200?text=Image+Not+Found';
+const GH_BASE = 'https://mo-grajdanka.github.io/RentEstate-v15';
+
+function normalizeImg(url) {
+  if (!url) return null;
+  if (/^https?:\/\//i.test(url)) return url;             
+  if (url.startsWith('/'))         return `${GH_BASE}${url}`;
+  if (url.startsWith('../'))       return `${GH_BASE}/` + url.replace(/^\.\.\//, '');
+  return `${GH_BASE}/${url.replace(/^\.?\//, '')}`;       // "img/..." или "./img/..."
+}
+
+
   
 
   // Плавное появление из точки
@@ -254,35 +267,50 @@ function pruneSelections() {
     return matches;
   }
 
-  function renderMatchingCards() {
-    const grid = document.getElementById('matchingCards');
-    if (!grid) return 0;
-  grid.innerHTML = '';
+function renderMatchingCards() {
+  const grid = document.getElementById('matchingCards');
+  if (!grid) return 0;
 
-    const matches = collectMatches();
+  grid.innerHTML = '';
+  const matches = collectMatches();
   if (!matches.length) return 0;
 
-    grid.innerHTML = matches.map(m => {
-      const href  = `pages/detail.html?purpose=${encodeURIComponent(m._purpose || 'land')}&id=${encodeURIComponent(m.id)}`;
-      const img   = Array.isArray(m.images) ? m.images[0] : (m.images || '');
-      const title = m.name || 'Объект';
-      const place = m.place ? `<p class="text-gray-500 text-xs mb-2">${m.place}</p>` : '';
-      return `
-        <a href="${href}" class="block bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
-          <img src="${img}" alt="${title}" class="w-full h-32 object-cover"
-               onerror="this.src='https://placehold.co/400x200?text=Image+Not+Found'">
-          <div class="p-4">
-            <h3 class="font-semibold mb-1">${title}</h3>
-            <p class="text-gray-600 text-sm mb-2">Площадь: ${Number.isFinite(m.area) ? m.area.toLocaleString("ru-RU") : "—"} м²</p>
-            ${place}
-            <p class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-              Подробнее <i class="fas fa-arrow-right ml-2"></i>
-            </p>
-          </div>
-        </a>
-      `;
-    }).join('');
-  }
+  grid.innerHTML = matches.map(m => {
+    // берём первый доступный источник
+    const raw = Array.isArray(m.images) ? m.images[0] : (m.images || m.img || m.main_image || null);
+    const src = normalizeImg(raw);
+
+    // если src есть — ставим его + onerror -> fallback
+    // если src нет — сразу ставим fallback (без onerror)
+    const imgTag = src
+      ? `<img src="${src}" alt="${m.name || ''}"
+              class="w-full h-32 object-cover"
+              referrerpolicy="no-referrer"
+              onerror="this.onerror=null;this.src='${FALLBACK_SM}'">`
+      : `<img src="${FALLBACK_SM}" alt="${m.name || ''}" class="w-full h-32 object-cover">`;
+
+    const href  = `pages/detail.html?purpose=${encodeURIComponent(m._purpose || 'land')}&id=${encodeURIComponent(m.id)}`;
+    const area  = Number.isFinite(m.area) ? m.area.toLocaleString("ru-RU") : "—";
+    const place = m.place ? `<p class="text-gray-500 text-xs mb-2">${m.place}</p>` : '';
+
+    return `
+      <a href="${href}" class="block bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+        ${imgTag}
+        <div class="p-4">
+          <h3 class="font-semibold mb-1">${m.name || 'Объект'}</h3>
+          <p class="text-gray-600 text-sm mb-2">Площадь: ${area} м²</p>
+          ${place}
+          <p class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+            Подробнее <i class="fas fa-arrow-right ml-2"></i>
+          </p>
+        </div>
+      </a>
+    `;
+  }).join('');
+
+  return matches.length;
+}
+
 
   function refreshAfterSelectionChange() {
     updateShowResultsButton();
@@ -473,3 +501,4 @@ showResultsBtn?.addEventListener('click', () => {
   updateShowResultsButton();
   renderMatchingCards();
 });
+
