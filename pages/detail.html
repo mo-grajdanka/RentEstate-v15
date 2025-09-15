@@ -310,7 +310,7 @@
     </div>
 
     <div class="flex gap-3">
-      <div class="w-48 text-gray-500 uppercase">Тех. характеристики ЗУ:</div>
+      <div class="w-48 text-gray-500 uppercase">Тех. характеристики:</div>
       <div id="pp-tech" class="flex-1 text-gray-900">
        
       </div>
@@ -756,7 +756,7 @@ if (placeDescEl) {
     : 'Информация отсутствует.';
   document.getElementById('pp-biz')?.replaceChildren(document.createTextNode(bizStr));
 
-  // Тех. характеристики ЗУ — соберём в один текст из массива technicalCharacteristics
+  // Тех. характеристики — соберём в один текст из массива technicalCharacteristics
   // (function fillTech(){
   //   const host = document.getElementById('pp-tech');
   //   if (!host) return;
@@ -1236,6 +1236,7 @@ if (placeDescEl) {
 
 
 </html>
+
 
 
 
