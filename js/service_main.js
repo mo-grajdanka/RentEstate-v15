@@ -219,7 +219,7 @@ function setPillActive(btn, active) {
       'shadow transition hover:bg-blue-600';
 
     if (prefix) prefix.textContent = '•';
-    if (countEl) countEl.className = 'ml-2 text-xs text-white'; // ← белый
+    if (countEl) countEl.className = 'ml-2 text-sm text-white'; // ← белый
   } else {
     btn.className =
       'inline-flex items-center gap-2 px-3 py-1.5 rounded-md ' +
@@ -227,7 +227,7 @@ function setPillActive(btn, active) {
       'ring-1 ring-blue-200 transition hover:bg-blue-100';
 
     if (prefix) prefix.textContent = '#';
-    if (countEl) countEl.className = 'ml-2 text-xs text-gray-500'; // ← серый
+    if (countEl) countEl.className = 'ml-2 text-sm text-gray-500'; // ← серый
   }
 }
 
@@ -408,7 +408,7 @@ subtypes.forEach((sub, idx) => {
   btn.innerHTML = `
   <span data-prefix class="font-semibold">#</span>
   <span>${sub}</span>
-  <span data-count class="ml-2 text-xs text-gray-500">${cnt}</span>
+  <span data-count class="ml-2 text-gray-500">${cnt}</span>
 `;
 
   btn.className = [
@@ -504,5 +504,6 @@ showResultsBtn?.addEventListener('click', () => {
   updateShowResultsButton();
   renderMatchingCards();
 });
+
 
 
