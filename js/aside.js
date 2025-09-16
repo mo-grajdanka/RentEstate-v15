@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ${imgTag}
         </div>
         <div class="p-4 flex flex-col">
-          <h3 class="font-semibold leading-tight mb-2 min-h-[2.5rem]">${site.name || ""}</h3>
+          <h3 class="font-semibold leading-snug mb-1 line-clamp-2">${site.name || ""}</h3>
           <p class="text-gray-500 text-sm mb-1">${site.place || ""}</p>
           <p class="text-gray-600 text-sm mb-3">Площадь: ${area} м²</p>
           <div class="mt-auto"></div>
@@ -157,3 +157,4 @@ document.addEventListener("DOMContentLoaded", () => {
   overlay.addEventListener("click", (e) => { if (e.target === overlay) hidePreview(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") hidePreview(); });
 });
+
