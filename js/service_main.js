@@ -94,14 +94,17 @@ function countForSubtype(subtype) {
 
   // Inline-плашки внутри текста: используем те же категории, что и в BIZ_TAXONOMY
 const $inline = document.getElementById('bizInlineCats');
+if ($inline) {
+  $inline.classList.add('text-2xl', 'md:text-3xl', 'leading-tight'); // <- крупнее
+}
 
 function setInlineActive(btn, active) {
   const prefix = btn.querySelector('[data-prefix]');
   if (active) {
-    btn.className = 'inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-600 text-white text-sm shadow transition';
+    btn.className = 'inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-600 text-white text-lg md:text-xl shadow transition';
     if (prefix) prefix.textContent = '•';
   } else {
-    btn.className = 'inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 text-sm transition';
+    btn.className = 'inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-100 text-blue-800 text-lg md:text-xl transition ring-1 ring-blue-200';
     if (prefix) prefix.textContent = '#';
   }
 }
@@ -501,4 +504,5 @@ showResultsBtn?.addEventListener('click', () => {
   updateShowResultsButton();
   renderMatchingCards();
 });
+
 
