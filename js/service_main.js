@@ -92,18 +92,16 @@ function countForSubtype(subtype) {
 }
 
 
+  // Inline-плашки внутри текста: используем те же категории, что и в BIZ_TAXONOMY
 const $inline = document.getElementById('bizInlineCats');
-if ($inline) {
-  $inline.classList.add('text-2xl', 'md:text-3xl', 'leading-tight'); // <- крупнее
-}
 
 function setInlineActive(btn, active) {
   const prefix = btn.querySelector('[data-prefix]');
   if (active) {
-    btn.className = 'inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-600 text-white text-lg md:text-xl shadow transition';
+    btn.className = 'inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-600 text-white text-sm shadow transition';
     if (prefix) prefix.textContent = '•';
   } else {
-    btn.className = 'inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-100 text-blue-800 text-lg md:text-xl transition ring-1 ring-blue-200';
+    btn.className = 'inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 text-sm transition';
     if (prefix) prefix.textContent = '#';
   }
 }
@@ -112,50 +110,52 @@ function renderInlineCats() {
   if (!$inline) return;
   $inline.innerHTML = '';
 
-  const cats = Object.keys(BIZ_TAXONOMY);
+  const cats = Object.keys(BIZ_TAXONOMY); // берём из твоей таксономии
   cats.forEach((cat, idx) => {
     const wrap = document.createElement('span');
     wrap.className = 'inline-flex items-center';
 
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.innerHTML = `
-      <span data-prefix class="font-semibold">#</span>
-      <span>${cat}</span>
-    `; // ← здесь именно cat, не sub
+    btn.innerHTML = `<span data-prefix class="font-semibold">#</span><span>${cat}</span>`;
 
+    // активность = есть ли категория в twoStep.selectedCats
     setInlineActive(btn, twoStep.selectedCats.has(cat));
 
     btn.addEventListener('click', () => {
       if (twoStep.selectedCats.has(cat)) {
         twoStep.selectedCats.delete(cat);
+        // снимаем выбранные подтипы этой категории
         Object.keys(selectedServices).forEach(k => {
           if (k.startsWith(cat + '-')) delete selectedServices[k];
         });
       } else {
-        if (twoStep.selectedCats.size >= 5) return;
+        if (twoStep.selectedCats.size >= 5) return; // лимит 5
         twoStep.selectedCats.add(cat);
       }
+
+      // синхронизация со «Шаг 1 / Шаг 2» и карточками
       renderTopCategories();
       renderSubcats();
       refreshVisibilityAndCards();
       refreshAfterSelectionChange();
+
+      // обновить стили inline-кнопки
       setInlineActive(btn, twoStep.selectedCats.has(cat));
     });
 
     wrap.appendChild(btn);
 
+    // запятая как в примере
     if (idx < cats.length - 1) {
       const comma = document.createElement('span');
       comma.textContent = ',';
       comma.className = 'mx-1 text-gray-400 select-none';
       wrap.appendChild(comma);
     }
-
     $inline.appendChild(wrap);
   });
 }
-
 
 // вызвать после инициализации твоего интерфейса
 renderInlineCats();
@@ -206,21 +206,25 @@ function refreshVisibilityAndCards() {
 
 function setPillActive(btn, active) {
   if (!btn) return;
-  const prefix  = btn.querySelector('[data-prefix]');
-  const countEl = btn.querySelector('[data-count]');
-
-  // единый размер текста для плашки
-  const baseBtn =
-    'inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm whitespace-nowrap transition ring-1';
+  const prefix = btn.querySelector('[data-prefix]');
+  const countEl = btn.querySelector('[data-count]'); // ищем счётчик
 
   if (active) {
-    btn.className = `${baseBtn} bg-blue-600 text-white shadow hover:bg-blue-600 ring-0`;
-    if (prefix)  prefix.textContent = '•';
-    if (countEl) countEl.className  = 'ml-2 align-middle text-white';
+    btn.className =
+      'inline-flex items-center gap-2 px-3 py-1.5 rounded-md ' +
+      'bg-blue-600 text-white text-sm whitespace-nowrap ' +
+      'shadow transition hover:bg-blue-600';
+
+    if (prefix) prefix.textContent = '•';
+    if (countEl) countEl.className = 'ml-2 text-xs text-white'; // ← белый
   } else {
-    btn.className = `${baseBtn} bg-blue-100 text-blue-800 hover:bg-blue-100 ring-blue-200`;
-    if (prefix)  prefix.textContent = '#';
-    if (countEl) countEl.className  = 'ml-2 align-middle text-gray-500';
+    btn.className =
+      'inline-flex items-center gap-2 px-3 py-1.5 rounded-md ' +
+      'bg-blue-100 text-blue-800 text-sm whitespace-nowrap ' +
+      'ring-1 ring-blue-200 transition hover:bg-blue-100';
+
+    if (prefix) prefix.textContent = '#';
+    if (countEl) countEl.className = 'ml-2 text-xs text-gray-500'; // ← серый
   }
 }
 
@@ -497,7 +501,4 @@ showResultsBtn?.addEventListener('click', () => {
   updateShowResultsButton();
   renderMatchingCards();
 });
-
-
-
 
