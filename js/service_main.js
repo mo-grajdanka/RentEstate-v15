@@ -119,7 +119,11 @@ function renderInlineCats() {
 
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.innerHTML = `<span data-prefix class="font-semibold">#</span><span>${cat}</span>`;
+    btn.innerHTML = `
+  <span data-prefix class="font-semibold">#</span>
+  <span>${sub}</span>
+  <span data-count class="ml-2 text-gray-500">${cnt}</span>
+`;
 
     // активность = есть ли категория в twoStep.selectedCats
     setInlineActive(btn, twoStep.selectedCats.has(cat));
@@ -208,25 +212,21 @@ function refreshVisibilityAndCards() {
 
 function setPillActive(btn, active) {
   if (!btn) return;
-  const prefix = btn.querySelector('[data-prefix]');
-  const countEl = btn.querySelector('[data-count]'); // ищем счётчик
+  const prefix  = btn.querySelector('[data-prefix]');
+  const countEl = btn.querySelector('[data-count]');
+
+  // единый размер текста для плашки
+  const baseBtn =
+    'inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm whitespace-nowrap transition ring-1';
 
   if (active) {
-    btn.className =
-      'inline-flex items-center gap-2 px-3 py-1.5 rounded-md ' +
-      'bg-blue-600 text-white text-sm whitespace-nowrap ' +
-      'shadow transition hover:bg-blue-600';
-
-    if (prefix) prefix.textContent = '•';
-    if (countEl) countEl.className = 'ml-2 text-xs text-white'; // ← белый
+    btn.className = `${baseBtn} bg-blue-600 text-white shadow hover:bg-blue-600 ring-0`;
+    if (prefix)  prefix.textContent = '•';
+    if (countEl) countEl.className  = 'ml-2 align-middle text-white';
   } else {
-    btn.className =
-      'inline-flex items-center gap-2 px-3 py-1.5 rounded-md ' +
-      'bg-blue-100 text-blue-800 text-sm whitespace-nowrap ' +
-      'ring-1 ring-blue-200 transition hover:bg-blue-100';
-
-    if (prefix) prefix.textContent = '#';
-    if (countEl) countEl.className = 'ml-2 text-xs text-gray-500'; // ← серый
+    btn.className = `${baseBtn} bg-blue-100 text-blue-800 hover:bg-blue-100 ring-blue-200`;
+    if (prefix)  prefix.textContent = '#';
+    if (countEl) countEl.className  = 'ml-2 align-middle text-gray-500';
   }
 }
 
@@ -503,5 +503,6 @@ showResultsBtn?.addEventListener('click', () => {
   updateShowResultsButton();
   renderMatchingCards();
 });
+
 
 
