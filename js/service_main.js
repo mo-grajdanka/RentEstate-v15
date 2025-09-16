@@ -209,27 +209,24 @@ function refreshVisibilityAndCards() {
 
 function setPillActive(btn, active) {
   if (!btn) return;
-  const prefix = btn.querySelector('[data-prefix]');
-  const countEl = btn.querySelector('[data-count]'); // ищем счётчик
+  const prefix  = btn.querySelector('[data-prefix]');
+  const countEl = btn.querySelector('[data-count]');
+
+  const baseBtn =
+    'inline-flex items-center gap-2 px-3 py-1.5 rounded-md ' +
+    'whitespace-nowrap transition ring-1 text-lg md:text-xl';
 
   if (active) {
-    btn.className =
-      'inline-flex items-center gap-2 px-3 py-1.5 rounded-md ' +
-      'bg-blue-600 text-white text-sm whitespace-nowrap ' +
-      'shadow transition hover:bg-blue-600';
-
-    if (prefix) prefix.textContent = '•';
-    if (countEl) countEl.className = 'ml-2 text-sm text-white'; // ← белый
+    btn.className = `${baseBtn} bg-blue-600 text-white shadow hover:bg-blue-600 ring-0`;
+    if (prefix)  prefix.textContent = '•';
+    if (countEl) countEl.className  = 'ml-2 text-base md:text-lg text-white';
   } else {
-    btn.className =
-      'inline-flex items-center gap-2 px-3 py-1.5 rounded-md ' +
-      'bg-blue-100 text-blue-800 text-sm whitespace-nowrap ' +
-      'ring-1 ring-blue-200 transition hover:bg-blue-100';
-
-    if (prefix) prefix.textContent = '#';
-    if (countEl) countEl.className = 'ml-2 text-sm text-gray-500'; // ← серый
+    btn.className = `${baseBtn} bg-blue-100 text-blue-800 hover:bg-blue-100 ring-blue-200`;
+    if (prefix)  prefix.textContent = '#';
+    if (countEl) countEl.className  = 'ml-2 text-base md:text-lg text-gray-500';
   }
 }
+
 
 
 
@@ -389,65 +386,63 @@ function renderSubcats() {
   row.className = 'flex flex-wrap gap-2';
   $bizSubs.appendChild(row);
 
-subtypes.forEach((sub, idx) => {
-  const catForKey = Array.from(twoStep.selectedCats)
-    .find(c => (BIZ_TAXONOMY[c] || []).includes(sub));
-  const key = `${catForKey}-${sub}`;
+  subtypes.forEach((sub, idx) => {
+    const catForKey = Array.from(twoStep.selectedCats)
+      .find(c => (BIZ_TAXONOMY[c] || []).includes(sub));
+    const key = `${catForKey}-${sub}`;
 
-  const wrap = document.createElement('span');
-  wrap.className = 'inline-flex items-center';
+    const wrap = document.createElement('span');
+    wrap.className = 'inline-flex items-center';
 
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.dataset.cat = catForKey;
-  btn.dataset.sub = sub;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.dataset.cat = catForKey;
+    btn.dataset.sub = sub;
 
-  // 👉 счётчик
-  const cnt = countForSubtype(sub);
+    const cnt = countForSubtype(sub);
 
-  btn.innerHTML = `
-  <span data-prefix class="font-semibold">#</span>
-  <span>${sub}</span>
-  <span data-count class="ml-2 text-gray-500">${cnt}</span>
-`;
+    // крупнее текст и счётчик
+    btn.innerHTML = `
+      <span data-prefix class="font-semibold text-lg md:text-xl">#</span>
+      <span class="text-lg md:text-xl">${sub}</span>
+      <span data-count class="ml-2 text-base md:text-lg text-gray-500">${cnt}</span>
+    `;
 
-  btn.className = [
-    'inline-flex items-center gap-2 px-3 py-1.5 rounded-md',
-    'text-sm whitespace-nowrap transition',
-    'ring-1'
-  ].join(' ');
+    // убрал text-sm, чтобы не занижать размер
+    btn.className = [
+      'inline-flex items-center gap-2 px-3 py-1.5 rounded-md',
+      'whitespace-nowrap transition ring-1'
+    ].join(' ');
 
-  setPillActive(btn, !!selectedServices[key]);
-  popIn(wrap);
+    setPillActive(btn, !!selectedServices[key]);
+    popIn(wrap);
 
-  // клик без "схлопывания"
-  btn.addEventListener('click', () => {
-    tapPop(btn);
-    const wasSelected = !!selectedServices[key];
-    if (wasSelected) {
-      delete selectedServices[key];
-    } else {
-      selectedServices[key] = { category: catForKey, service: sub };
+    btn.addEventListener('click', () => {
+      tapPop(btn);
+      const wasSelected = !!selectedServices[key];
+      if (wasSelected) {
+        delete selectedServices[key];
+      } else {
+        selectedServices[key] = { category: catForKey, service: sub };
+      }
+      setPillActive(btn, !wasSelected);
+      refreshVisibilityAndCards();
+      refreshAfterSelectionChange();
+    });
+
+    wrap.appendChild(btn);
+
+    if (idx < subtypes.length - 1) {
+      const comma = document.createElement('span');
+      comma.textContent = ',';
+      comma.className = 'mx-2 text-gray-400 select-none';
+      wrap.appendChild(comma);
     }
-    setPillActive(btn, !wasSelected);
-    refreshVisibilityAndCards();
-    refreshAfterSelectionChange();
+
+    row.appendChild(wrap);
   });
-
-  wrap.appendChild(btn);
-
-  if (idx < subtypes.length - 1) {
-    const comma = document.createElement('span');
-    comma.textContent = ',';
-    comma.className = 'mx-2 text-gray-400 select-none';
-    wrap.appendChild(comma);
-  }
-
-  row.appendChild(wrap);
-});
-
-
 }
+
 
 
 
@@ -504,6 +499,7 @@ showResultsBtn?.addEventListener('click', () => {
   updateShowResultsButton();
   renderMatchingCards();
 });
+
 
 
 
