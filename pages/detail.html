@@ -11,6 +11,7 @@
   <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
   <script defer src="../js/modal.js"></script>
   <script defer src="../js/script.js"></script>
+  <script defer src="../js/burger.js"></script>
   <script defer src="../js/detail_map.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
 <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
@@ -55,73 +56,6 @@
       </div>
     </div>
   </header>
-
-  <style>
-    body.modal-open { overflow: hidden; }
-    .hamburger-menu.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .hamburger-menu.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .hamburger-menu.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
-    }
-
-    .hamburger-menu {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .hamburger-menu span {
-      width: 20px;
-      height: 2px;
-      background: #374151;
-      transition: all 0.3s;
-    }
-  </style>
-
-  <script>
-
-    const hamburgerMenu = document.querySelector('.hamburger-menu');
-    if (hamburgerMenu) {
-      hamburgerMenu.addEventListener('click', function () {
-        this.classList.toggle('active');
-
-      });
-    }
-
-    const additionalStyles = `
-    .category-item.active {
-        background: #7c3aed !important;
-        color: white !important;
-        border-color: #7c3aed !important;
-    }
-    
-    .hamburger-menu.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
-    
-    .hamburger-menu.active span:nth-child(2) {
-        opacity: 0;
-    }
-    
-    .hamburger-menu.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -6px);
-    }
-    
-    .project-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-`;
-  </script>
 
   <main class="flex-grow container mx-auto px-4 py-8">
 
@@ -1250,6 +1184,7 @@ if (placeDescEl) {
 
 
 </html>
+
 
 
 
