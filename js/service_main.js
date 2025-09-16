@@ -112,7 +112,7 @@ function renderInlineCats() {
   if (!$inline) return;
   $inline.innerHTML = '';
 
-  const cats = Object.keys(BIZ_TAXONOMY); // берём из твоей таксономии
+  const cats = Object.keys(BIZ_TAXONOMY);
   cats.forEach((cat, idx) => {
     const wrap = document.createElement('span');
     wrap.className = 'inline-flex items-center';
@@ -120,48 +120,42 @@ function renderInlineCats() {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.innerHTML = `
-  <span data-prefix class="font-semibold">#</span>
-  <span>${sub}</span>
-  <span data-count class="ml-2 text-gray-500">${cnt}</span>
-`;
+      <span data-prefix class="font-semibold">#</span>
+      <span>${cat}</span>
+    `; // ← здесь именно cat, не sub
 
-    // активность = есть ли категория в twoStep.selectedCats
     setInlineActive(btn, twoStep.selectedCats.has(cat));
 
     btn.addEventListener('click', () => {
       if (twoStep.selectedCats.has(cat)) {
         twoStep.selectedCats.delete(cat);
-        // снимаем выбранные подтипы этой категории
         Object.keys(selectedServices).forEach(k => {
           if (k.startsWith(cat + '-')) delete selectedServices[k];
         });
       } else {
-        if (twoStep.selectedCats.size >= 5) return; // лимит 5
+        if (twoStep.selectedCats.size >= 5) return;
         twoStep.selectedCats.add(cat);
       }
-
-      // синхронизация со «Шаг 1 / Шаг 2» и карточками
       renderTopCategories();
       renderSubcats();
       refreshVisibilityAndCards();
       refreshAfterSelectionChange();
-
-      // обновить стили inline-кнопки
       setInlineActive(btn, twoStep.selectedCats.has(cat));
     });
 
     wrap.appendChild(btn);
 
-    // запятая как в примере
     if (idx < cats.length - 1) {
       const comma = document.createElement('span');
       comma.textContent = ',';
       comma.className = 'mx-1 text-gray-400 select-none';
       wrap.appendChild(comma);
     }
+
     $inline.appendChild(wrap);
   });
 }
+
 
 // вызвать после инициализации твоего интерфейса
 renderInlineCats();
@@ -503,6 +497,7 @@ showResultsBtn?.addEventListener('click', () => {
   updateShowResultsButton();
   renderMatchingCards();
 });
+
 
 
 
